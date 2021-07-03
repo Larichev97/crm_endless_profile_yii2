@@ -64,7 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 </h6>
                             </div>
                             <div class="col-sm-8 text-secondary">
-                                <?= $modelClient->getClientStatusName() ?><i class="fa fa-circle pl-2" aria-hidden="true" style="color: <?= $modelClient->clientStatus->color ?>"></i>
+                                <?= $modelClient->getClientStatusName() ?><i class="fas fa-star pl-2" aria-hidden="true" style="color: <?= $modelClient->clientStatus->color ?>"></i>
                             </div>
                         </div><hr>
                         <div class="row">

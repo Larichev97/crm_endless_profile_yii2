@@ -101,7 +101,7 @@ Breadcrumbs::widget([
                                         'prompt' => 'Выберите...',
                                     ],
                                     'content' => function ($data) {
-                                        return $data->getProfileQrStatusName() . '<i class="fa fa-circle pl-2" aria-hidden="true" style="color:' . $data->profileQrStatus->color . ';"></i>';
+                                        return $data->getProfileQrStatusName() . '<i class="fas fa-star pull-right" aria-hidden="true" style="color:' . $data->profileQrStatus->color . ';"></i>';
                                     },
                                 ],
                                 [

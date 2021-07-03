@@ -79,7 +79,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'profile_status_id',
                 'format' => 'html',
                 'value' => function ($model) {
-                    return $model->getProfileQrStatusName() . '<i class="fa fa-circle pl-2" aria-hidden="true" style="color:' . $model->profileQrStatus->color . ';"></i>';
+                    return $model->getProfileQrStatusName() . '<i class="fas fa-star pl-2" aria-hidden="true" style="color:' . $model->profileQrStatus->color . ';"></i>';
                 }
             ],
             'slider_img_link',

@@ -84,7 +84,7 @@ $this->registerJsFile('../web/js/client/client.js');
                                         'prompt' => 'Выберите...',
                                     ],
                                     'content' => function ($data) {
-                                        return $data->getClientStatusName() . '<i class="fa fa-circle pl-2" aria-hidden="true" style="color:' . $data->clientStatus->color . ';"></i>';
+                                        return $data->getClientStatusName() . '<i class="fas fa-star pull-right" aria-hidden="true" style="color:' . $data->clientStatus->color . ';"></i>';
                                     },
                                 ],
                                 [
