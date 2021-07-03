@@ -1,0 +1,190 @@
+<?php
+
+namespace app\models;
+
+use Yii;
+use yii\helpers\ArrayHelper;
+
+/**
+ * This is the model class for table "qr".
+ *
+ * @property int $id
+ * @property int $client_id
+ * @property string|null $first_name
+ * @property string|null $last_name
+ * @property string|null $patronymic_name
+ * @property string|null $bdate
+ * @property string|null $date_death
+ * @property string|null $cause_of_death
+ * @property string|null $country_born_id
+ * @property int|null $city_born_id
+ * @property string|null hobby
+ * @property string|null $profession
+ * @property string|null $biography
+ * @property string|null $characteristic
+ * @property string|null $last_wish
+ * @property string|null $comment
+ * @property int|null $profile_status_id
+ * @property string|null $slider_img_link
+ * @property string|null $photo_link
+ * @property string|null $document_link
+ * @property string|null $other_link
+ * @property string|null $favourite_song
+ * @property string|null $date_add
+ * @property string|null $date_update
+ */
+class Qr extends \yii\db\ActiveRecord
+{
+    /**
+     * {@inheritdoc}
+     */
+    public static function tableName()
+    {
+        return 'crm_project.qr';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function rules()
+    {
+        return [
+            [['client_id', 'first_name', 'last_name', 'date_death', 'biography',], 'required'],
+            [['bdate', 'date_death', 'date_add', 'date_update'], 'safe'],
+            [['client_id', 'city_born_id', 'profile_status_id'], 'integer'],
+            [['biography', 'characteristic', 'last_wish', 'comment', 'hobby',], 'string'],
+            [['first_name', 'last_name', 'patronymic_name', 'cause_of_death', 'country_born_id', 'profession', 'slider_img_link', 'photo_link', 'document_link', 'other_link', 'favourite_song'], 'string', 'max' => 255],
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => '№ профиля',
+            'client_id' => '№ клиента',
+            'first_name' => 'Имя',
+            'last_name' => 'Фамилия',
+            'patronymic_name' => 'Отчество',
+            'bdate' => 'Дата рождения',
+            'date_death' => 'Дата смерти',
+            'cause_of_death' => 'Причина смерти',
+            'country_born_id' => 'Страна рождения',
+            'city_born_id' => 'Город рождения',
+            'hobby' => 'Увлечения',
+            'profession' => 'Род деятельности',
+            'biography' => 'Биография',
+            'characteristic' => 'Характеристика',
+            'last_wish' => 'Последнее пожелание',
+            'comment' => 'Комментарий агента',
+            'profile_status_id' => 'Статус QR-таблички',
+            'slider_img_link' => 'Slider Img Link', // созадить отдельную таблицу!
+            'photo_link' => 'Личное фото',
+            'document_link' => 'Документ',
+            'other_link' => 'Ссылка',
+            'favourite_song' => 'Любимая песня',
+            'date_add' => 'Дата создания',
+            'date_update' => 'Дата обновления',
+        ];
+    }
+
+    public function getProfileQrStatus()
+    {
+        return $this->hasOne(QrStatus::className(), ['id' => 'profile_status_id']);
+    }
+
+    public function getProfileQrStatusName()
+    {
+        $profile_qr_status_name = $this->profileQrStatus;
+
+        return $profile_qr_status_name ? $profile_qr_status_name->name : '';
+    }
+
+    public static function getProfileQrStatusStatusListItems()
+    {
+        $profile_qr_status_list = QrStatus::find()
+            ->select(['id', 'name'])
+            ->all();
+
+        return ArrayHelper::map($profile_qr_status_list, 'id', 'name');
+    }
+
+    public function getQrCountryOfBirth()
+    {
+        return $this->hasOne(Countries::className(), ['id' => 'country_born_id']);
+    }
+
+    public function getQrCountryOfBirthName()
+    {
+        $country_name = $this->qrCountryOfBirth;
+
+        return $country_name ? $country_name->name : '';
+    }
+
+    public static function getQrCountrysOfBirthListItems()
+    {
+        $country_list = Countries::find()
+            ->select(['id', 'name'])
+            ->all();
+
+        return ArrayHelper::map($country_list, 'id', 'name');
+    }
+
+    public function getQrCityOfBirth()
+    {
+        return $this->hasOne(Cities::className(), ['id' => 'city_born_id']);
+    }
+
+    public function getQrCityOfBirthName()
+    {
+        $city_name = $this->qrCityOfBirth;
+
+        return $city_name ? $city_name->name : '';
+    }
+
+    public static function getQrCityOfBirthListItems()
+    {
+        $cities_list = Cities::find()
+            ->select(['id', 'name'])
+            ->all();
+
+        return ArrayHelper::map($cities_list, 'id', 'name');
+    }
+
+    public function getQrName()
+    {
+        $qr_fio = $this->last_name . ' ' . $this->first_name . ' ' . $this->patronymic_name;
+
+        return $qr_fio ? $qr_fio : '';
+    }
+
+    public function getCountQrsAllStatus() {
+        $modelQr = self::find()
+            ->where(['IS NOT', 'profile_status_id', null])
+            ->all();
+
+        $countQrAllStatus = 0;
+
+        foreach ($modelQr as $item) {
+            $countQrAllStatus++;
+        }
+
+        return $countQrAllStatus;
+    }
+
+    public function getCountQrsStatus($profile_status_id) {
+        $modelQr = self::find()
+            ->where(['profile_status_id' => $profile_status_id])
+            ->all();
+
+        $countQrStatus = 0;
+
+        foreach ($modelQr as $item) {
+            $countQrStatus++;
+        }
+
+        return $countQrStatus;
+    }
+}
