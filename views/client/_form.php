@@ -14,9 +14,21 @@ $this->registerJsFile('../web/js/client/client.js');
 
 
 <div class="panel panel-default" style="padding: 15px 15px; background-color:#f5f5f5; border: solid 2px #00759C">
+    <?php if (Yii::$app->controller->action->id == 'update') : ?>
+        <div class="row form-group form-group-sm">
+            <label class="col-sm-2">
+                <?= $model->getAttributeLabel('status_id') ?>
+            </label>
+            <div class="col-sm-10">
+                <?= $form->field($model, 'status_id')
+                    ->dropDownList(\app\models\Client::getClientStatusListItems(), ['prompt' => 'Укажите статус...', 'id' => 'client-status_id'])
+                    ->label(false) ?>
+            </div>
+        </div>
+    <?php endif; ?>
     <div class="row form-group form-group-sm">
         <label class="col-sm-2">
-            <?= $model->getAttributeLabel('first_name') . ' ' . '*' ?>
+            <?= $model->getAttributeLabel('first_name') . ' ' . '<i class="fas fa-asterisk" style="color: #d63031"></i>' ?>
         </label>
         <div class="col-sm-10">
             <?= $form->field($model, 'first_name')->textInput(['placeholder' => 'Укажите имя...'])->label(false) ?>
@@ -60,7 +72,7 @@ $this->registerJsFile('../web/js/client/client.js');
 <!--                </div>-->
     <div class="row form-group form-group-sm">
         <label class="col-sm-2">
-            <?= $model->getAttributeLabel('phone_number') . ' ' . '*' ?>
+            <?= $model->getAttributeLabel('phone_number') . ' ' . '<i class="fas fa-asterisk" style="color: #d63031"></i>' ?>
         </label>
         <div class="col-sm-10">
             <?= $form->field($model, 'phone_number')->textInput(['type' => 'tel','placeholder' => 'Укажите номер телефона...', 'minlength' => '10', 'maxlength' => '13'])->label(false) ?>
@@ -76,7 +88,7 @@ $this->registerJsFile('../web/js/client/client.js');
     </div>
     <div class="row form-group form-group-sm" id="block-city_id">
         <label class="col-sm-2 control-label">
-            <?= $model->getAttributeLabel('city_id') . ' ' . '*' ?>
+            <?= $model->getAttributeLabel('city_id') . ' ' . '<i class="fas fa-asterisk" style="color: #d63031"></i>' ?>
         </label>
         <div class="col-sm-10">
             <?= $form->field($model, 'city_id')

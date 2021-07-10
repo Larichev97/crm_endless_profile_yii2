@@ -25,6 +25,7 @@ use yii\helpers\ArrayHelper;
  * @property string|null $last_wish
  * @property string|null $comment
  * @property int|null $profile_status_id
+ * @property string|null $geolocation
  * @property string|null $slider_img_link
  * @property string|null $photo_link
  * @property string|null $document_link
@@ -52,7 +53,7 @@ class Qr extends \yii\db\ActiveRecord
             [['client_id', 'first_name', 'last_name', 'date_death', 'biography',], 'required'],
             [['bdate', 'date_death', 'date_add', 'date_update'], 'safe'],
             [['client_id', 'city_born_id', 'profile_status_id'], 'integer'],
-            [['biography', 'characteristic', 'last_wish', 'comment', 'hobby',], 'string'],
+            [['biography', 'characteristic', 'last_wish', 'comment', 'hobby', 'geolocation',], 'string'],
             [['first_name', 'last_name', 'patronymic_name', 'cause_of_death', 'country_born_id', 'profession', 'slider_img_link', 'photo_link', 'document_link', 'other_link', 'favourite_song'], 'string', 'max' => 255],
         ];
     }
@@ -80,6 +81,7 @@ class Qr extends \yii\db\ActiveRecord
             'last_wish' => 'Последнее пожелание',
             'comment' => 'Комментарий агента',
             'profile_status_id' => 'Статус QR-таблички',
+            'geolocation' => 'Геолокация таблички',
             'slider_img_link' => 'Slider Img Link', // созадить отдельную таблицу!
             'photo_link' => 'Личное фото',
             'document_link' => 'Документ',

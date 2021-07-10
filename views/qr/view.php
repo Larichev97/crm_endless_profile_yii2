@@ -82,6 +82,15 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->getProfileQrStatusName() . '<i class="fas fa-star pl-2" aria-hidden="true" style="color:' . $model->profileQrStatus->color . ';"></i>';
                 }
             ],
+            [
+                'attribute' => 'geolocation',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return ($model->geolocation) ?
+                        '<a target="_blank" data-pjax="0" href="https://www.google.com.ua/maps/search/' . $model->geolocation . '"><i class="fas fa-map-marker-alt" style="color: #ff7675"></i> ' . $model->geolocation . '</a>'
+                        : '-';
+                }
+            ],
             'slider_img_link',
             'photo_link',
             'document_link',

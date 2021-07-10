@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="card" style="border: solid 2px #00759C; background-color: #f5f5f5; height:100%;">
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150" style="border: solid 4px #00759C;">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Фото клиента" class="rounded-circle" width="150" style="border: solid 4px #00759C;">
                             <div class="mt-3">
                                 <h4><?= $modelClient->first_name . ' ' . $modelClient->last_name ?></h4>
                                 <p class="text-muted font-size-sm">г. <?= $modelClient->getClientCityName() . ', ' . $modelClient->getClientCountryName() ?></p>

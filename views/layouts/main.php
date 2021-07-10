@@ -48,8 +48,6 @@ AppAsset::register($this);
             ['label' => 'Главная', 'url' => ['/main/index'],],
             ['label' => 'Клиенты', 'url' => ['/client/index']],
             ['label' => 'QR-профили', 'url' => ['/qr/index']],
-            //['label' => 'О нас', 'url' => ['/main/about']],
-            //['label' => 'Контакты', 'url' => ['/main/contact']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Войти', 'url' => ['/main/login']]
             ) : (

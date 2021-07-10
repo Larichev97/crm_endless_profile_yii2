@@ -21,7 +21,7 @@ class QrSearch extends Qr
         return [
             [['client_id', 'first_name', 'last_name', 'date_death', 'biography',], 'required'],
             [['id', 'client_id', 'city_born_id', 'profile_status_id'], 'integer'],
-            [['first_name', 'last_name', 'patronymic_name', 'bdate', 'date_death', 'cause_of_death', 'country_born_id', 'profession', 'biography', 'characteristic', 'last_wish', 'comment', 'slider_img_link', 'photo_link', 'document_link', 'other_link', 'favourite_song', 'date_add', 'date_update', 'hobby',], 'safe'],
+            [['first_name', 'last_name', 'patronymic_name', 'bdate', 'date_death', 'cause_of_death', 'country_born_id', 'profession', 'biography', 'characteristic', 'last_wish', 'comment', 'slider_img_link', 'photo_link', 'document_link', 'other_link', 'favourite_song', 'date_add', 'date_update', 'hobby', 'geolocation',], 'safe'],
         ];
     }
 
@@ -48,6 +48,7 @@ class QrSearch extends Qr
             'last_wish' => 'Последнее пожелание',
             'comment' => 'Комментарий агента',
             'profile_status_id' => 'Статус QR-таблички',
+            'geolocation' => 'Геолокация таблички',
             'slider_img_link' => 'Slider Img Link', // созадить отдельную таблицу!
             'photo_link' => 'Личное фото',
             'document_link' => 'Документ',

@@ -18,15 +18,15 @@ $this->registerJsFile('../web/js/qr/qr.js');
 <div class="panel panel-default" style="padding: 15px 15px; background-color:#f5f5f5; border: solid 2px #00759C">
     <div class="row form-group form-group-sm">
         <label class="col-sm-2">
-            <?= $model->getAttributeLabel('client_id') . ' ' . '*' ?>
+            <?= $model->getAttributeLabel('client_id') . ' ' . '<i class="fas fa-asterisk" style="color: #d63031"></i>' ?>
         </label>
         <div class="col-sm-10">
-            <?= $form->field($model, 'client_id')->textInput(['type' => 'number', 'step' => '1', 'placeholder' => 'Укажите номер клиента...'])->label(false) ?>
+            <?= $form->field($model, 'client_id')->textInput(['type' => 'number', 'step' => '1', 'placeholder' => 'Укажите ID клиента, который заказывает табличку...'])->label(false) ?>
         </div>
     </div>
     <div class="row form-group form-group-sm">
         <label class="col-sm-2">
-            <?= $model->getAttributeLabel('first_name') . ' ' . '*' ?>
+            <?= $model->getAttributeLabel('first_name') . ' ' . '<i class="fas fa-asterisk" style="color: #d63031"></i>' ?>
         </label>
         <div class="col-sm-10">
             <?= $form->field($model, 'first_name')->textInput(['placeholder' => 'Укажите имя...'])->label(false) ?>
@@ -34,7 +34,7 @@ $this->registerJsFile('../web/js/qr/qr.js');
     </div>
     <div class="row form-group form-group-sm">
         <label class="col-sm-2 control-label">
-            <?= $model->getAttributeLabel('last_name') . ' ' . '*' ?>
+            <?= $model->getAttributeLabel('last_name') . ' ' . '<i class="fas fa-asterisk" style="color: #d63031"></i>' ?>
         </label>
         <div class="col-sm-10">
             <?= $form->field($model, 'last_name')->textInput(['placeholder' => 'Укажите фамилию...'])->label(false) ?>
@@ -60,7 +60,7 @@ $this->registerJsFile('../web/js/qr/qr.js');
     </div>
     <div class="row form-group form-group-sm" id="block-date_death">
         <label class="col-sm-2 control-label">
-            <?= $model->getAttributeLabel('date_death') . ' ' . '*' ?>
+            <?= $model->getAttributeLabel('date_death') . ' ' . '<i class="fas fa-asterisk" style="color: #d63031"></i>' ?>
         </label>
         <div class="col-sm-10">
             <?= $form->field($model, 'date_death')
@@ -114,10 +114,10 @@ $this->registerJsFile('../web/js/qr/qr.js');
     </div>
     <div class="row form-group form-group-sm">
         <label class="col-sm-2 control-label">
-            <?= $model->getAttributeLabel('biography') . ' ' . '*'  ?>
+            <?= $model->getAttributeLabel('biography') . ' ' . '<i class="fas fa-asterisk" style="color: #d63031"></i>'  ?>
         </label>
         <div class="col-sm-10">
-            <?= $form->field($model, 'biography')->textarea(['placeholder' => 'Укажите биографию...'])->label(false) ?>
+            <?= $form->field($model, 'biography')->textarea(['placeholder' => 'Укажите биографию...', 'rows' => 20])->label(false) ?>
         </div>
     </div>
     <div class="row form-group form-group-sm">
@@ -125,7 +125,7 @@ $this->registerJsFile('../web/js/qr/qr.js');
             <?= $model->getAttributeLabel('characteristic') ?>
         </label>
         <div class="col-sm-10">
-            <?= $form->field($model, 'characteristic')->textarea(['placeholder' => 'Укажите характеристику...'])->label(false) ?>
+            <?= $form->field($model, 'characteristic')->textarea(['placeholder' => 'Укажите характеристику...', 'rows' => 20])->label(false) ?>
         </div>
     </div>
     <div class="row form-group form-group-sm">
@@ -133,7 +133,7 @@ $this->registerJsFile('../web/js/qr/qr.js');
             <?= $model->getAttributeLabel('last_wish') ?>
         </label>
         <div class="col-sm-10">
-            <?= $form->field($model, 'last_wish')->textarea(['placeholder' => 'Укажите последнее пожелание...'])->label(false) ?>
+            <?= $form->field($model, 'last_wish')->textarea(['placeholder' => 'Укажите последнее пожелание...', 'rows' => 5])->label(false) ?>
         </div>
     </div>
 <!--    <div class="form-group form-group-sm" id="block-profile_status_id">-->
@@ -163,11 +163,19 @@ $this->registerJsFile('../web/js/qr/qr.js');
         </div>
     </div>
     <div class="row form-group form-group-sm">
+        <label class="col-sm-2">
+            <?= $model->getAttributeLabel('geolocation') ?>
+        </label>
+        <div class="col-sm-10">
+            <?= $form->field($model, 'geolocation')->textInput(['placeholder' => 'Укажите геолокацию таблички на месте установки (00.000000, 00.000000) ...'])->label(false) ?>
+        </div>
+    </div>
+    <div class="row form-group form-group-sm">
         <label class="col-sm-2 control-label">
             <?= $model->getAttributeLabel('comment') ?>
         </label>
         <div class="col-sm-10">
-            <?= $form->field($model, 'comment')->textarea(['placeholder' => 'Комментарий агента...'])->label(false) ?>
+            <?= $form->field($model, 'comment')->textarea(['placeholder' => 'Комментарий агента...', 'rows' => 4])->label(false) ?>
         </div>
     </div>
     <div class="row form-group form-group-sm">
