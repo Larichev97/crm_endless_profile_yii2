@@ -5,12 +5,9 @@
 
 use app\widgets\Alert;
 use yii\helpers\Html;
-//use yii\bootstrap\Nav;
-//use yii\bootstrap\NavBar;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
 use yii\bootstrap4\Breadcrumbs;
-//use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
@@ -33,7 +30,7 @@ AppAsset::register($this);
     <?php
     NavBar::begin([
         //'brandLabel' => Yii::$app->name,
-        'brandLabel' => 'Remember',
+        'brandLabel' => '<span id="brandLogo">ENDLESS PROFILE</span>',
         'brandUrl' => '/main/',
         'options' => [
             //'class' => 'navbar-dark bg-dark navbar-expand-lg',    //new b4  15.06.21

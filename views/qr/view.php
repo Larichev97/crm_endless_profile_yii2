@@ -12,15 +12,15 @@ $this->params['breadcrumbs'][] = ['label' => 'Все QR-профили', 'url' =
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="qr-view">
-    <div class="row">
-        <div class="col-lg-9"><h1>Данные QR-профиля №<?= $model->id ?></h1></div>
+    <div class="row align-items-center">
+        <div class="col-lg-9"><h1>Данные QR-профиля №<?= $model->id ?>  <?= Html::a('Вид QR-профиля <i class="fas fa-qrcode pl-2"></i>', ['profile', 'id' => $model->id], ['class' => 'btn btn-info', 'target' => '_blank']) ?></h1></div>
         <div class="col-lg-3 text-right">
-            <p>
+            <p style="margin: 0">
                 <?= Html::a('Редактировать <i class="fas fa-edit pl-2"></i>', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
                 <?= Html::a('Удалить <i class="fas fa-trash pl-2"></i>', ['delete', 'id' => $model->id], [
                     'class' => 'btn btn-danger',
                     'data' => [
-                        'confirm' => 'Are you sure you want to delete this item?',
+                        'confirm' => 'Вы действительно хотите удалить профиль?',
                         'method' => 'post',
                     ],
                 ]) ?>

@@ -32,7 +32,7 @@ class QrController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index','create','update','delete', 'view',],
+                        'actions' => ['index','create','update','delete', 'view', 'profile',],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -65,6 +65,19 @@ class QrController extends Controller
     public function actionView($id)
     {
         return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
+    /**
+     * Displays a single Qr model for guest.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionProfile($id)
+    {
+        return $this->render('profile', [
             'model' => $this->findModel($id),
         ]);
     }

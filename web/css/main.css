@@ -1,6 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gabriela&display=swap'); /* /qr/profile Ф.И.О. font */
+@import url('https://fonts.googleapis.com/css2?family=Alice&display=swap'); /* /qr/profile Headers font */
 html,
 body {
     height: 100%;
+}
+
+#brandLogo {
+    font-family: 'Fugaz One', cursive;
+}
+
+#qrProfileText {
+    font-family: 'Gabriela', serif;
+}
+
+#qrProfileHeader {
+    font-family: 'Alice', serif;
 }
 
 .wrap {
