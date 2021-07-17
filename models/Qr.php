@@ -82,7 +82,7 @@ class Qr extends \yii\db\ActiveRecord
             'comment' => 'Комментарий агента',
             'profile_status_id' => 'Статус QR-таблички',
             'geolocation' => 'Геолокация таблички',
-            'slider_img_link' => 'Slider Img Link', // созадить отдельную таблицу!
+            'slider_img_link' => 'Slider Img Link', // создать отдельную таблицу!
             'photo_link' => 'Личное фото',
             'document_link' => 'Документ',
             'other_link' => 'Ссылка',
@@ -104,13 +104,42 @@ class Qr extends \yii\db\ActiveRecord
         return $profile_qr_status_name ? $profile_qr_status_name->name : '';
     }
 
-    public static function getProfileQrStatusStatusListItems()
+    public static function getProfileQrStatusListItems()
     {
         $profile_qr_status_list = QrStatus::find()
             ->select(['id', 'name'])
             ->all();
 
         return ArrayHelper::map($profile_qr_status_list, 'id', 'name');
+    }
+
+    public static function getProfileQrStatusListItemsWithoutNew()
+    {
+        $profile_qr_status_list = QrStatus::find()
+            ->select(['id', 'name'])
+            ->where(['<>','id', 1])
+            ->all();
+
+        return ArrayHelper::map($profile_qr_status_list, 'id', 'name');
+    }
+
+    public function getQrStatuses()
+    {
+        $qr_statuses = QrStatus::find()
+            ->select(['id', 'name', 'color'])
+            ->all();
+
+        return $qr_statuses;
+    }
+
+    public function getLastQrStatusIdInTable()
+    {
+        $last_qr_status_id = QrStatus::find()
+            ->select(['id'])
+            ->orderBy(['id' => \SORT_DESC])
+            ->one();
+
+        return $last_qr_status_id['id'];
     }
 
     public function getQrCountryOfBirth()
@@ -189,4 +218,49 @@ class Qr extends \yii\db\ActiveRecord
 
         return $countQrStatus;
     }
+
+    public function getPrintQrStatusesBlock($modelQrStatus, $lastQrStatusIdInTable, Qr $modelQr)
+    {
+        foreach ($modelQrStatus as $item) {
+            echo '<div class="row align-items-center justify-content-center">
+                <div class="col-lg-8">';
+            echo $item['name'];
+            echo '</div>
+                <div class="col-lg-4 text-right">
+                    <a target="_blank" href="/qr/index?QrSearch[profile_status_id]=' . $item['id'] . '">
+                        <button data-original-title="Список';
+
+            $this->getTooltipQrStatusTip($item['id']);
+
+            echo '" data-toggle="tooltip" data-placement="top" class="btn" style="width: 60%; background-color:' . $item['color'] . '"><span class="span font-weight-bold" style="color: #ffffff; font-size: 16px;">' . $modelQr->getCountQrsStatus($item['id']) . '</span></button></a>
+                </div>
+            </div>';
+
+            if ($lastQrStatusIdInTable !== $item['id']) {
+                echo '<hr>';
+            }
+        }
+    }
+
+    private function getTooltipQrStatusTip($status_id)
+    {
+        switch ($status_id) {
+            case 1:
+                echo " новых QR-профилей";
+                break;
+            case 2:
+                echo " QR-профилей, которые находится у клиентов";
+                break;
+            case 3:
+                echo " QR-профилей, которые создаются";
+                break;
+            case 4:
+                echo " потерянных QR-профилей";
+                break;
+            case 5:
+                echo " QR-профилей, у которых не правильный URL";
+                break;
+        }
+    }
+
 }

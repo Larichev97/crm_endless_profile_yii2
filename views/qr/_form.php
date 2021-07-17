@@ -16,6 +16,18 @@ $this->registerJsFile('../web/js/qr/qr.js');
 ]); ?>
 
 <div class="panel panel-default" style="padding: 15px 15px; background-color:#f5f5f5; border: solid 2px #00759C">
+    <?php if (Yii::$app->controller->action->id == 'update') : ?>
+        <div class="row form-group form-group-sm">
+            <label class="col-sm-2">
+                <?= $model->getAttributeLabel('profile_status_id') ?>
+            </label>
+            <div class="col-sm-10">
+                <?= $form->field($model, 'profile_status_id')
+                    ->dropDownList(\app\models\Qr::getProfileQrStatusListItems(), ['prompt' => 'Укажите статус QR-профиля...', 'id' => 'qr-profile_status_id'])
+                    ->label(false) ?>
+            </div>
+        </div>
+    <?php endif; ?>
     <div class="row form-group form-group-sm">
         <label class="col-sm-2">
             <?= $model->getAttributeLabel('client_id') . ' ' . '<i class="fas fa-asterisk" style="color: #d63031"></i>' ?>
@@ -136,16 +148,6 @@ $this->registerJsFile('../web/js/qr/qr.js');
             <?= $form->field($model, 'last_wish')->textarea(['placeholder' => 'Укажите последнее пожелание...', 'rows' => 5])->label(false) ?>
         </div>
     </div>
-<!--    <div class="form-group form-group-sm" id="block-profile_status_id">-->
-<!--        <label class="col-sm-3 control-label">-->
-<!--            --><?php //= $model->getAttributeLabel('profile_status_id') . ' ' . '*'  ?>
-<!--        </label>-->
-<!--        <div class="col-sm-9">-->
-<!--            --><?php //= $form->field($model, 'profile_status_id')
-//                ->dropDownList(\app\models\Qr::getProfileQrStatusStatusListItems(), ['prompt' => 'Укажите статус профиля...', 'id' => 'qr-profile_status_id'])
-//                ->label(false) ?>
-<!--        </div>-->
-<!--    </div>-->
     <div class="row form-group form-group-sm">
         <label class="col-sm-2">
             <?= $model->getAttributeLabel('favourite_song') ?>
@@ -187,7 +189,7 @@ $this->registerJsFile('../web/js/qr/qr.js');
 
 <?= $form->field($model, 'id')->hiddenInput()->label(false) ?>
 <?= $form->field($model, 'date_update')->hiddenInput()->label(false) ?>
-<!-- СТАТУС ПРОФИЛЯ "Default" (создать доп. таблицу статусов профиля) -->
+<!-- ПРИ СОЗДАНИИ СТАТУС QR-профиля "Default" = 1 (Новая)  -->
 <?= $form->field($model, 'profile_status_id')->hiddenInput()->label(false) ?>
 
 <?php ActiveForm::end(); ?>

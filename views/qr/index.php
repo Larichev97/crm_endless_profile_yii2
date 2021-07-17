@@ -95,7 +95,7 @@ Breadcrumbs::widget([
                                 [
                                     'headerOptions' => ['width' => '130'],
                                     'attribute' => 'profile_status_id',
-                                    'filter' => \app\models\Qr::getProfileQrStatusStatusListItems(),
+                                    'filter' => \app\models\Qr::getProfileQrStatusListItems(),
                                     'filterInputOptions' => [
                                         'class' => 'form-control',
                                         'prompt' => 'Выберите...',
@@ -137,8 +137,8 @@ Breadcrumbs::widget([
                                     },
                                 ],
                                 ['class' => 'yii\grid\ActionColumn',
-                                    'headerOptions' => ['width' => '25'],
-                                    'template' => '{view}',
+                                    'headerOptions' => ['width' => '40'],
+                                    'template' => '{view} {update}',
                                     'buttons' => [
                                         'view' => function ($url, $data) {
                                             return Html::a('', ['qr/view', 'id' => $data->id], ['class' => 'fas fa-eye icon-eye-open',
@@ -146,7 +146,14 @@ Breadcrumbs::widget([
                                                 'data-original-title' => 'Просмотр QR-профиля',
                                                 'data-toggle' => 'tooltip',
                                             ]);
-                                        }
+                                        },
+                                        'update' => function ($url, $data) {
+                                            return Html::a('', ['/qr/update', 'id' => $data->id], ['class' => 'glyphicon glyphicon-pencil',
+                                                'style' => 'text-decoration:none',
+                                                'data-original-title' => 'Редактировать',
+                                                'data-toggle' => 'tooltip',
+                                            ]);
+                                        },
                                     ],
                                 ],
                             ],

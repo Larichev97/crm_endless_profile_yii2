@@ -46,6 +46,7 @@ $this->title = 'QR-профиль №' . $model->id;
                 </div>
             </div><hr style="margin:5px 0 5px 0;">
 
+            <?php if ((!empty($model->bdate)) && (!empty($model->date_death))) { ?>
             <div class="row align-items-center" style="flex-wrap: nowrap">
                 <div class="col-sm-3">
                     <h3 style="font-size: 14px; margin: 0;">
@@ -56,6 +57,21 @@ $this->title = 'QR-профиль №' . $model->id;
                     <?= $years = Carbon::parse($model->date_death)->format('Y') - Carbon::parse($model->bdate)->format('Y') ?>
                 </div>
             </div><hr style="margin:5px 0 5px 0;">
+            <?php } ?>
+
+
+            <?php if (!empty($model->cause_of_death)) { ?>
+            <div class="row align-items-center" style="flex-wrap: nowrap">
+                <div class="col-sm-3">
+                    <h3 style="font-size: 14px; margin: 0;">
+                        <b><?= $model->getAttributeLabel('cause_of_death') ?></b>
+                    </h3>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                    <?= $model->cause_of_death ?>
+                </div>
+            </div><hr style="margin:5px 0 5px 0;">
+            <?php } ?>
 
             <div class="row align-items-center" style="flex-wrap: nowrap">
                 <div class="col-sm-3">

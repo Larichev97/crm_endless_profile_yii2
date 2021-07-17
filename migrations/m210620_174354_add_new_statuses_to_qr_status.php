@@ -17,6 +17,7 @@ class m210620_174354_add_new_statuses_to_qr_status extends Migration
             [ 'Создаётся','#fbc531'],
             [ 'У клиента','#4cd137'],
             [ 'Потеряна','#eb2f06'],
+            [ 'Не актуальный URL','#2C3A47'],
         ]);
     }
 

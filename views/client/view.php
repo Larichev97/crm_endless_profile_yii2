@@ -107,16 +107,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <?= $modelClient->email ?>
                             </div>
                         </div><hr>
-<!--                        <div class="row">-->
-<!--                            <div class="col-sm-4">-->
-<!--                                <h6 class="mb-0">-->
-<!--                                    <b>--><?php //= $modelClient->getAttributeLabel('comment') ?><!--</b>-->
-<!--                                </h6>-->
-<!--                            </div>-->
-<!--                            <div class="col-sm-8 text-secondary">-->
-<!--                                --><?php //= $modelClient->comment ?>
-<!--                            </div>-->
-<!--                        </div><hr>-->
                         <div class="row">
                             <div class="col-sm-4">
                                 <h6 class="mb-0">
@@ -177,13 +167,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                     },
                                 ],
                                 [
-                                    'headerOptions' => ['width' => '50'],
-                                    'attribute' => 'client_id',
-                                    'content' => function ($data) {
-                                        return '<a target="_blank" data-pjax="0" href="/client/view?id=' . $data->client_id . '">' . $data->client_id . '</a>';
-                                    },
-                                ],
-                                [
                                     'headerOptions' => ['width' => '220'],
                                     'label' => 'Ф.И.О',
                                     'filter' => false,
@@ -192,7 +175,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     },
                                 ],
                                 [
-                                    'headerOptions' => ['width' => '85'],
+                                    'headerOptions' => ['width' => '75'],
                                     'attribute' => 'bdate',
                                     'filter' => false,
                                     'content' => function ($data) {
@@ -207,38 +190,42 @@ $this->params['breadcrumbs'][] = $this->title;
                                         return ($data->date_death) ? Carbon::parse($data->date_death)->format('d.m.Y') : 'XX.XX.XXXX';
                                     },
                                 ],
-//                                [
-//                                    'headerOptions' => ['width' => '130'],        // CREATE MODEL/Table !!!
-//                                    'attribute' => 'profile_status_id',
-//                                    'filter' => \app\models\Qr::getProfileQrStatusStatusListItems(),
-//                                    'filterInputOptions' => [
-//                                        'class' => 'form-control',
-//                                        'prompt' => 'Выберите...',
-//                                    ],
-//                                    'content' => function ($data) {
-//                                        return $data->getProfileQrStatusName();
-//                                    },
-//                                ],
-                                [
-                                    'headerOptions' => ['width' => '80'],
-                                    'attribute' => 'country_born_id',
-                                    'filter' => \app\models\Qr::getQrCountrysOfBirthListItems(),
-                                    'content' => function ($data) {
-                                        return  $data->getQrCountryOfBirthName();
-                                    },
-                                ],
                                 [
                                     'headerOptions' => ['width' => '130'],
-                                    'attribute' => 'city_born_id',
-                                    'filter' => \app\models\Qr::getQrCityOfBirthListItems(),
+                                    'attribute' => 'profile_status_id',
+                                    'filter' => \app\models\Qr::getProfileQrStatusListItems(),
                                     'filterInputOptions' => [
                                         'class' => 'form-control',
                                         'prompt' => 'Выберите...',
                                     ],
                                     'content' => function ($data) {
-                                        return  $data->getQrCityOfBirthName();
+                                        return $data->getProfileQrStatusName() . '<i class="fas fa-star pl-2" aria-hidden="true" style="color:' . $data->profileQrStatus->color . ';"></i>';
                                     },
                                 ],
+//                                [
+//                                    'headerOptions' => ['width' => '80'],
+//                                    'attribute' => 'country_born_id',
+//                                    'filter' => \app\models\Qr::getQrCountrysOfBirthListItems(),
+//                                    'filterInputOptions' => [
+//                                        'class' => 'form-control',
+//                                        'prompt' => 'Выберите...',
+//                                    ],
+//                                    'content' => function ($data) {
+//                                        return  $data->getQrCountryOfBirthName();
+//                                    },
+//                                ],
+//                                [
+//                                    'headerOptions' => ['width' => '130'],
+//                                    'attribute' => 'city_born_id',
+//                                    'filter' => \app\models\Qr::getQrCityOfBirthListItems(),
+//                                    'filterInputOptions' => [
+//                                        'class' => 'form-control',
+//                                        'prompt' => 'Выберите...',
+//                                    ],
+//                                    'content' => function ($data) {
+//                                        return  $data->getQrCityOfBirthName();
+//                                    },
+//                                ],
                                 [
                                     'headerOptions' => ['width' => '85'],
                                     'attribute' => 'date_add',
@@ -247,9 +234,17 @@ $this->params['breadcrumbs'][] = $this->title;
                                         return ($data->date_add) ? Carbon::parse($data->date_add)->format('d.m.Y H:i') : '-';
                                     },
                                 ],
+                                [
+                                    'headerOptions' => ['width' => '85'],
+                                    'attribute' => 'date_update',
+                                    'filter' => false,
+                                    'content' => function ($data) {
+                                        return ($data->date_update) ? Carbon::parse($data->date_update)->format('d.m.Y H:i') : '-';
+                                    },
+                                ],
                                 ['class' => 'yii\grid\ActionColumn',
-                                    'headerOptions' => ['width' => '45'],
-                                    'template' => '{view}',
+                                    'headerOptions' => ['width' => '50'],
+                                    'template' => '{view} {update}',
                                     'buttons' => [
                                         'view' => function ($url, $data) {
                                             return Html::a('', ['qr/view', 'id' => $data->id], ['class' => 'fas fa-eye icon-eye-open',
@@ -259,7 +254,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 'target' => '_blank',
                                                 'data-pjax' => 0,
                                             ]);
-                                        }
+                                        },
+                                        'update' => function ($url, $data) {
+                                            return Html::a('', ['/qr/update', 'id' => $data->id], ['class' => 'fas fa-pencil-alt',
+                                                'style' => 'text-decoration:none',
+                                                'data-original-title' => 'Редактировать',
+                                                'data-toggle' => 'tooltip',
+                                            ]);
+                                        },
                                     ],
                                 ],
 

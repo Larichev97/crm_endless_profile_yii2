@@ -8,7 +8,6 @@ use app\assets\AppAsset;
 AppAsset::register($this);
 
 $this->title = 'Редактирование клиента №' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Главная', 'url' => ['main']];
 $this->params['breadcrumbs'][] = ['label' => 'Клиенты', 'url' => ['client/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

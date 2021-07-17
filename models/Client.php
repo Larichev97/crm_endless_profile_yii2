@@ -91,6 +91,35 @@ class Client extends ActiveRecord
         return ArrayHelper::map($client_status_list, 'id', 'name');
     }
 
+    public static function getClientStatusListItemsWithoutNew()
+    {
+        $client_status_list = ClientStatus::find()
+            ->select(['id', 'name'])
+            ->where(['<>', 'id', 1])
+            ->all();
+
+        return ArrayHelper::map($client_status_list, 'id', 'name');
+    }
+
+    public function getClientStatuses()
+    {
+        $client_statuses = ClientStatus::find()
+            ->select(['id', 'name', 'color'])
+            ->all();
+
+        return $client_statuses;
+    }
+
+    public function getLastClientStatusIdInTable()
+    {
+        $last_client_status_id = ClientStatus::find()
+            ->select(['id'])
+            ->orderBy(['id' => \SORT_DESC])
+            ->one();
+
+        return $last_client_status_id['id'];
+    }
+
     public function getClientCountry()
     {
         return $this->hasOne(Countries::className(), ['id' => 'country_id']);
@@ -106,7 +135,7 @@ class Client extends ActiveRecord
     public static function getClientCountriesListItems()
     {
         $country_list = Countries::find()
-        ->select(['id', 'name'])
+            ->select(['id', 'name'])
             ->all();
 
         return ArrayHelper::map($country_list, 'id', 'name');
@@ -127,7 +156,7 @@ class Client extends ActiveRecord
     public static function getClientCitiesUAListItems()
     {
         $country_list = Cities::find()
-        ->select(['id', 'name'])
+            ->select(['id', 'name'])
             ->where(['country_id' => 1])
             ->all();
 
@@ -151,7 +180,8 @@ class Client extends ActiveRecord
         return $client_fio ? $client_fio : '';
     }
 
-    public function getCountClientsAllStatus() {
+    public function getCountClientsAllStatus()
+    {
         $modelClient = self::find()
             ->where(['IS NOT', 'status_id', null])
             ->all();
@@ -165,7 +195,8 @@ class Client extends ActiveRecord
         return $countClientAllStatus;
     }
 
-    public function getCountClientsStatus($status_id) {
+    public function getCountClientsStatus($status_id)
+    {
         $modelClient = self::find()
             ->where(['status_id' => $status_id])
             ->all();
@@ -177,6 +208,47 @@ class Client extends ActiveRecord
         }
 
         return $countClientStatus;
+    }
+
+    public function getPrintClientStatusesBlock($modelClientStatus, $lastClientStatusIdInTable, Client $modelClient)
+    {
+        foreach ($modelClientStatus as $item) {
+            echo '<div class="row align-items-center justify-content-center">
+                <div class="col-lg-8">';
+            echo $item['name'];
+            echo '</div>
+                <div class="col-lg-4 text-right">
+                    <a target="_blank" href="/client/index?ClientSearch[status_id]=' . $item['id'] . '">
+                        <button data-original-title="Список';
+
+            $this->getTooltipClientStatusTip($item['id']);
+
+            echo 'клиентов" data-toggle="tooltip" data-placement="top" class="btn" style="width: 60%; background-color:' . $item['color'] . '"><span class="span font-weight-bold" style="color: #ffffff; font-size: 16px;">' . $modelClient->getCountClientsStatus($item['id']) . '</span></button></a>
+                </div>
+            </div>';
+
+            if ($lastClientStatusIdInTable !== $item['id']) {
+                echo '<hr>';
+            }
+        }
+    }
+
+    private function getTooltipClientStatusTip($status_id)
+    {
+        switch ($status_id) {
+            case 1:
+                echo " новых ";
+                break;
+            case 2:
+                echo " активных ";
+                break;
+            case 3:
+                echo " приостановленных ";
+                break;
+            case 4:
+                echo " отмененных ";
+                break;
+        }
     }
 
 }

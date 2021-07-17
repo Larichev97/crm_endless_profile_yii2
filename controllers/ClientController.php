@@ -8,7 +8,6 @@ use app\models\ClientSearch;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
-use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\Client;
 use Carbon\Carbon;
@@ -74,10 +73,6 @@ class ClientController extends Controller
         $modelClient = $this->findModel($id);
 
         $searchModelQr = new QrSearch();
-//        $searchModelAngel = QrSearch::find()
-//            ->where(['client_id' => $id])
-//            ->all();
-        //$qrSearchProvider = $searchModelQr->qrFilter(Yii::$app->request->queryParams);
         $qrSearchProvider = $searchModelQr->qrFilter(Yii::$app->request->queryParams, true, $id);
 
         return $this->render('/client/view', [
@@ -94,15 +89,12 @@ class ClientController extends Controller
 
         $model = new Client();
 
-        //echo '<pre>'; var_dump($post); die();
 
         $model->date_add = $dateNow;
         $model->status_id = 1; // "Новый"
         $model->country_id = 1; // "Украина"
 
-        //if ($post && $model->save()) {
         if ($post && $model->load($post)) {
-            //echo '<pre>'; var_dump($model); die();
             $model->save();
             return $this->redirect('/client/index');
         }

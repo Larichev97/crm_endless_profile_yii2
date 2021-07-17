@@ -55,6 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return ($model->date_death) ? Carbon::parse($model->date_death)->format('d.m.Y') : '-';
                 }
             ],
+            'cause_of_death',
             [
                 'attribute' => 'country_born_id',
                 'format' => 'html',
