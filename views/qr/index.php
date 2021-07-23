@@ -13,7 +13,7 @@ use yii\widgets\Pjax;
 $this->title = 'Все QR-профили';
 $this->params['breadcrumbs'][] = $this->title;
 
-$this->registerJsFile('../web/js/qr/qr.js');
+//$this->registerJsFile('../web/js/qr/qr.js');
 
 ?>
 
@@ -113,7 +113,7 @@ Breadcrumbs::widget([
                                         'prompt' => 'Выберите...',
                                     ],
                                     'content' => function ($data) {
-                                        return  $data->getQrCountryOfBirthName();
+                                        return ($data->country_born_id) ? $data->getQrCountryOfBirthName() : '-';
                                     },
                                 ],
                                 [
@@ -125,7 +125,7 @@ Breadcrumbs::widget([
                                         'prompt' => 'Выберите...',
                                     ],
                                     'content' => function ($data) {
-                                        return  $data->getQrCityOfBirthName();
+                                        return ($data->city_born_id) ? $data->getQrCityOfBirthName() : '-';
                                     },
                                 ],
                                 [

@@ -14,8 +14,14 @@ $this->title = 'QR-профиль №' . $model->id;
     <div class="row mt-2">
         <div class="col-sm-12 text-center"><h2 id="qrProfileText" style="font-size: 19px;"><b><?= $model->last_name . ' ' . $model->first_name . ' ' . $model->patronymic_name ?></b></h2></div>
     </div>
-    <div class="d-flex flex-column align-items-center text-center">
-        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Фото" class="rounded-circle" width="150" style="border: solid 4px #00759C;">
+    <div class="d-flex flex-column align-items-center" style="width: 300px; height: 300px; position: relative; overflow: hidden; border-radius: 50%; border: solid 4px #00759C; margin:0 auto;">
+        <?php
+            if (!empty($model->photo_link)) {
+                echo  '<img src="' . Yii::getAlias('@web').'/images/qr-avatars/' . $model->photo_link . '" alt="Фото" class="rounded-circle" style="display:inline; margin:0 auto; margin-left: -25%; height: 100%; width: auto;">';
+            } else {
+                echo  '<img src="' . Yii::getAlias('@web').'/images/default_qr_profile_photo.png" alt="Фото" class="rounded-circle" style="display:inline; margin:0 auto; margin-left: -25%; height: 100%; width: auto;">';
+            }
+        ?>
     </div>
 
 <!--  1 BLOCK  -->

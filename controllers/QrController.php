@@ -10,6 +10,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * QrController implements the CRUD actions for Qr model.
@@ -32,7 +33,7 @@ class QrController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index','create','update','delete', 'view', 'profile',],
+                        'actions' => ['index','create','update','delete', 'view', 'profile', 'upload-qr',],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -119,11 +120,15 @@ class QrController extends Controller
     {
         $dateNow = Carbon::now()->format('Y-m-d H:i:s');
 
+        $post = Yii::$app->request->post();
+
         $model = $this->findModel($id);
 
-        $model->date_update = $dateNow;
+        if ($model->load($post)) {
+            $model->date_update = $dateNow;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->save();
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -144,6 +149,37 @@ class QrController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    /**
+     * Uploads Qr-code image.
+     * If uploaded is successful, the browser will be redirected to the 'qr/upload-qr' page.
+     * @return mixed
+     */
+    public function actionUploadQr($id)
+    {
+        $post = \Yii::$app->request->post();
+
+        $model = $this->findModel($id);
+
+        if (Yii::$app->request->isPost) {
+            $model->load($post);
+
+            $model->qr_link = UploadedFile::getInstance($model, 'qr_link');
+
+            //$model->qr_link->saveAs("images/qr-codes/{$model->qr_link->baseName}.{$model->qr_link->extension}");
+            $model->qr_link->saveAs("images/qr-codes/qr-code-profile-" . $id . ".{$model->qr_link->extension}");
+            $file_name = 'qr-code-profile-' . $id . '.' . $model->qr_link->extension;
+            $model->qr_link = $file_name;
+
+            $model->save(false);
+
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        return $this->render('upload-qr', [
+            'model' => $model,
+        ]);
     }
 
     /**

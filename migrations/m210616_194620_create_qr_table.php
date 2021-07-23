@@ -31,6 +31,7 @@ class m210616_194620_create_qr_table extends Migration
             'comment' => $this->text(),
             'profile_status_id' => $this->integer(),
             'geolocation' => $this->string(),
+            'qr_link' => $this->string(),
             'slider_img_link' => $this->string(),
             'photo_link' => $this->string(),
             'document_link' => $this->string(),

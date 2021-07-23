@@ -74,7 +74,7 @@ $this->title = 'Панель управления';
                                         Все
                                     </div>
                                     <div class="col-lg-4 text-right">
-                                        <a target="_blank" href="/qr/index"><button data-original-title="Список всех QR-профилей" data-toggle="tooltip" data-placement="top" class="btn" style="width: 60%; background-color: #00759C"><span class="span font-weight-bold" style="color: #ffffff; font-size: 16px;"><?= $modelQr->getCountQrsAllStatus() ?></span></button></a>
+                                        <a target="_blank" href="/qr/index"><button data-original-title="Список всех QR-табличек" data-toggle="tooltip" data-placement="top" class="btn" style="width: 60%; background-color: #00759C"><span class="span font-weight-bold" style="color: #ffffff; font-size: 16px;"><?= $modelQr->getCountQrsAllStatus() ?></span></button></a>
                                     </div>
                                 </div><hr>
                                 <?php $modelQr->getPrintQrStatusesBlock($modelQr->getQrStatuses(), $modelQr->getLastQrStatusIdInTable(), $modelQr) ?>

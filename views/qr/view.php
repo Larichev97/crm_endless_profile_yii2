@@ -32,6 +32,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             [
+                'attribute' => 'qr_link',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    if (!empty($model->qr_link)) {
+                        return '<div style="display:flex; align-items:center;">' . Html::img(Yii::getAlias('@web').'/images/qr-codes/'. $model->qr_link, ['width' => '200px', 'height' => '200px']) . '</div>';
+                    } else {
+                        return '<div style="display:flex; align-items:center;">' .
+                               '<a class="btn btn-warning" data-pjax="0" target="_blank" href="https://api.qrserver.com/v1/create-qr-code/?size=800x800&format=svg&data=http://crm_project/qr/profile?id='. $model->id .'">Сгенерировать QR-КОД<i class="fas fa-qrcode pl-2"></i></a>' .
+                                Html::a('Загрузить изображение<i class="fas fa-file-upload pl-2"></i>', ['/qr/upload-qr', 'id' => $model->id], ['class' => 'btn btn-success', 'style' => 'margin-left: 20px;']) .
+                               '</div>';
+                    }
+                }
+            ],
+            [
                 'attribute' => 'client_id',
                 'format' => 'raw',
                 'value' => function ($model) {

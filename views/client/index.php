@@ -93,7 +93,7 @@ $this->registerJsFile('../web/js/client/client.js');
                                     //'filter' => \app\models\Client::getClientCountriesListItems(),
                                     'filter' => false,
                                     'content' => function ($data) {
-                                        return  $data->getClientCountryName();
+                                        return ($data->country_id) ? $data->getClientCountryName() : '-';
                                     },
                                 ],
                                 [
@@ -105,7 +105,7 @@ $this->registerJsFile('../web/js/client/client.js');
                                         'prompt' => 'Выберите...',
                                     ],
                                     'content' => function ($data) {
-                                        return  $data->getClientCityName();
+                                        return ($data->city_id) ? $data->getClientCityName() : '-';
                                     },
                                 ],
                                 [

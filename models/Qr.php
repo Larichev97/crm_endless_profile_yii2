@@ -26,6 +26,7 @@ use yii\helpers\ArrayHelper;
  * @property string|null $comment
  * @property int|null $profile_status_id
  * @property string|null $geolocation
+ * @property string|null $qr_link
  * @property string|null $slider_img_link
  * @property string|null $photo_link
  * @property string|null $document_link
@@ -54,7 +55,8 @@ class Qr extends \yii\db\ActiveRecord
             [['bdate', 'date_death', 'date_add', 'date_update'], 'safe'],
             [['client_id', 'city_born_id', 'profile_status_id'], 'integer'],
             [['biography', 'characteristic', 'last_wish', 'comment', 'hobby', 'geolocation',], 'string'],
-            [['first_name', 'last_name', 'patronymic_name', 'cause_of_death', 'country_born_id', 'profession', 'slider_img_link', 'photo_link', 'document_link', 'other_link', 'favourite_song'], 'string', 'max' => 255],
+            [['first_name', 'last_name', 'patronymic_name', 'cause_of_death', 'country_born_id', 'profession', 'slider_img_link', 'photo_link', 'document_link', 'other_link', 'favourite_song',], 'string', 'max' => 255],
+            [['qr_link'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, svg'],
         ];
     }
 
@@ -82,6 +84,7 @@ class Qr extends \yii\db\ActiveRecord
             'comment' => 'Комментарий агента',
             'profile_status_id' => 'Статус QR-таблички',
             'geolocation' => 'Геолокация таблички',
+            'qr_link' => 'Изображение QR-кода',
             'slider_img_link' => 'Slider Img Link', // создать отдельную таблицу!
             'photo_link' => 'Личное фото',
             'document_link' => 'Документ',
@@ -246,19 +249,19 @@ class Qr extends \yii\db\ActiveRecord
     {
         switch ($status_id) {
             case 1:
-                echo " новых QR-профилей";
+                echo " новых QR-табличек";
                 break;
             case 2:
-                echo " QR-профилей, которые находится у клиентов";
+                echo " QR-табличек, которые создаются";
                 break;
             case 3:
-                echo " QR-профилей, которые создаются";
+                echo " QR-табличек, которые находится у клиентов";
                 break;
             case 4:
-                echo " потерянных QR-профилей";
+                echo " потерянных QR-табличек";
                 break;
             case 5:
-                echo " QR-профилей, у которых не правильный URL";
+                echo " QR-табличек, у которых не правильный URL";
                 break;
         }
     }

@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /* @var $model app\models\Qr */
 /* @var $form yii\widgets\ActiveForm */
 
-$this->registerJsFile('../web/js/qr/qr.js');
+//$this->registerJsFile('../web/js/qr/qr.js');
 ?>
 <?php $form = ActiveForm::begin([
     'id' => 'form-qr',
@@ -189,7 +189,5 @@ $this->registerJsFile('../web/js/qr/qr.js');
 
 <?= $form->field($model, 'id')->hiddenInput()->label(false) ?>
 <?= $form->field($model, 'date_update')->hiddenInput()->label(false) ?>
-<!-- ПРИ СОЗДАНИИ СТАТУС QR-профиля "Default" = 1 (Новая)  -->
-<?= $form->field($model, 'profile_status_id')->hiddenInput()->label(false) ?>
 
 <?php ActiveForm::end(); ?>

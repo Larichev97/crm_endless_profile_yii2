@@ -108,12 +108,15 @@ class ClientController extends Controller
     {
         $dateNow = Carbon::now()->format('Y-m-d H:i:s');
 
+        $post = Yii::$app->request->post();
+
         $model = $this->findModel($id);
 
-        $model->date_update = $dateNow;
+        if ($model->load($post)) {
+            $model->date_update = $dateNow;
 
+            $model->save();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['/client/view', 'id' => $model->id]);
         }
 
