@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\TestQrSearch;
 use Carbon\Carbon;
 use Yii;
 use app\models\Qr;
@@ -50,6 +51,8 @@ class QrController extends Controller
     {
         $searchModelQrSearch = new QrSearch();
         $qrSearchProvider = $searchModelQrSearch->qrFilter(Yii::$app->request->queryParams, false);
+        //$searchModelQrSearch = new TestQrSearch(); // TEST BUILDER FILTER
+        //$qrSearchProvider = $searchModelQrSearch->qrFilter(Yii::$app->request->queryParams, false); // TEST BUILDER FILTER
 
         return $this->render('index', [
             'searchModelQrSearch' => $searchModelQrSearch,

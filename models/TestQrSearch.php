@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Carbon\Carbon;
+use QrSearchBuilder;
+use SearchFilterCreator;
 use Yii;
 use yii\data\ActiveDataProvider;
 
@@ -73,10 +75,10 @@ class TestQrSearch extends Qr
     public function qrFilter($params, bool $client_qrs = false, $client_id = null)
     {
         // TEST BUILDER
-        $request = Yii::$app->request->get();
+        $request = Yii::$app->request->get('QrSearch');
 
-        $creator = new \SearchFilterCreator();
-        $qrBuilder = new \QrSearchBuilder([
+        $creator = new SearchFilterCreator();
+        $qrBuilder = new QrSearchBuilder([
             'date_add_start' => $request['date_add_start'],
             'date_add_end' => $request['date_add_end'],
         ]);

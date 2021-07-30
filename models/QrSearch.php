@@ -49,7 +49,7 @@ class QrSearch extends Qr
             'comment' => 'Комментарий агента',
             'profile_status_id' => 'Статус QR-таблички',
             'geolocation' => 'Геолокация таблички',
-            'slider_img_link' => 'Slider Img Link', // созадить отдельную таблицу!
+            'slider_img_link' => 'Slider Img Link', // создать отдельную таблицу!
             'photo_link' => 'Личное фото',
             'document_link' => 'Документ',
             'other_link' => 'Ссылка',
