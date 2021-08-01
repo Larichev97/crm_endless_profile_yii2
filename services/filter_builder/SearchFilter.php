@@ -1,4 +1,5 @@
 <?php
+namespace app\services\filter_builder;
 
 
 class SearchFilter
@@ -6,6 +7,14 @@ class SearchFilter
     public $query;
     public $dataProvider;
 
-//    public $date_add;
+    public function getQuery()
+    {
+
+    }
+
+    public function getDataProvider()
+    {
+
+    }
 
 }

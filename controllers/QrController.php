@@ -49,10 +49,10 @@ class QrController extends Controller
      */
     public function actionIndex()
     {
-        $searchModelQrSearch = new QrSearch();
-        $qrSearchProvider = $searchModelQrSearch->qrFilter(Yii::$app->request->queryParams, false);
-        //$searchModelQrSearch = new TestQrSearch(); // TEST BUILDER FILTER
-        //$qrSearchProvider = $searchModelQrSearch->qrFilter(Yii::$app->request->queryParams, false); // TEST BUILDER FILTER
+        //$searchModelQrSearch = new QrSearch();    // Default (working)
+        //$qrSearchProvider = $searchModelQrSearch->qrFilter(Yii::$app->request->queryParams, false);   // Default (working)
+        $searchModelQrSearch = new TestQrSearch(); // TEST BUILDER FILTER
+        $qrSearchProvider = $searchModelQrSearch->qrFilter(Yii::$app->request->queryParams, false); // TEST BUILDER FILTER
 
         return $this->render('index', [
             'searchModelQrSearch' => $searchModelQrSearch,

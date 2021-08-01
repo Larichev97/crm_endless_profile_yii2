@@ -2,9 +2,8 @@
 
 namespace app\models;
 
-use Carbon\Carbon;
-use QrSearchBuilder;
-use SearchFilterCreator;
+use app\services\filter_builder\QrSearchBuilder;
+use app\services\filter_builder\SearchFilterCreator;
 use Yii;
 use yii\data\ActiveDataProvider;
 
@@ -75,20 +74,31 @@ class TestQrSearch extends Qr
     public function qrFilter($params, bool $client_qrs = false, $client_id = null)
     {
         // TEST BUILDER
-        $request = Yii::$app->request->get('QrSearch');
 
-        $creator = new SearchFilterCreator();
-        $qrBuilder = new QrSearchBuilder([
-            'date_add_start' => $request['date_add_start'],
-            'date_add_end' => $request['date_add_end'],
-        ]);
+        $creator = new SearchFilterCreator();   // #1
 
         $this->load($params);
 
-        $qr = $creator->searchFilterBuild($qrBuilder);
+        $request = Yii::$app->request->get('TestQrSearch');
 
-        return $qr; // ??
+        //echo '<pre>'; var_dump($request); die();  // test array
+
+        $qrBuilder = new QrSearchBuilder([  // #2
+            $request
+        ]);
+
+        //echo '<pre>'; var_dump($qrBuilder); die();  // test array
+
+        $qrProvider = $creator->searchFilterBuild($qrBuilder);  // #3
+
+        //echo '<pre>'; var_dump($qrProvider); die();  // test array
+
+        return $qrProvider;  // #4
     //---------------------------------------------------------------------------------------------------
+
+
+
+
         // БЫЛО
 
 //        $query = Qr::find();

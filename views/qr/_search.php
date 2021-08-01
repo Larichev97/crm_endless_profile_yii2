@@ -19,7 +19,8 @@ use yii\widgets\ActiveForm;
                             <h3 style="margin: 0; font-weight: bold">
                                 Фильтр
                                 <span style="background-color: #d1d8e0; margin-left: 5px; font-size: 14px;!important; border-radius: 20px;">
-                                    <?= $searchModelQrSearch->getQrFliterInfoSearch(); ?>
+                                    <!-- Закомментировано для тестирования модели TestQrSearch.php !!! (Раскомментировать после проверки: 01.08.21) -->
+                                    <?php //= $searchModelQrSearch->getQrFliterInfoSearch(); ?>
                                 </span>
                             </h3>
                         </div>

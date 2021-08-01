@@ -1,10 +1,16 @@
 <?php
-
+namespace app\services\filter_builder;
 
 interface SearchFilterBuilderInterface
 {
-    public function searchFilterFind();
-    public function searchFilterDataProvider();
+    public function searchFilterConditionAddDate(); // `date_add` (с - по)
+
+    public function searchFilterResult();
+
+
+//    public function searchFilterConditionBirthdayDate(); // `bdate` (с - по)
+//    public function searchFilterConditionDeathDate(); // `date_death` (с - по)
+//    public function searchFilterConditionUpdateDate(); // `date_update` (с - по)
 
 //    public function searchFilterLeftJoin();
 //    public function searchFilterWhere();
@@ -12,11 +18,4 @@ interface SearchFilterBuilderInterface
 //    public function searchFilterAndFilterWhere();
 //    public function searchFilterOrderBy();
 //    public function searchFilterGroupBy();
-
-//    public function searchFilterConditionBirthdayDate(); // `bdate` (с - по)
-//    public function searchFilterConditionDeathDate(); // `date_death` (с - по)
-    public function searchFilterConditionAddDate(); // `date_add` (с - по)
-//    public function searchFilterConditionUpdateDate(); // `date_update` (с - по)
-
-    public function searchFilterResult();
 }
