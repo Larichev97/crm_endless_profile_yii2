@@ -79,12 +79,14 @@ class TestQrSearch extends Qr
 
         $this->load($params);
 
+        //echo '<pre>'; var_dump($params); die();  // test array
+
         $request = Yii::$app->request->get('TestQrSearch');
 
         //echo '<pre>'; var_dump($request); die();  // test array
 
         $qrBuilder = new QrSearchBuilder([  // #2
-            $request
+            $request, $params
         ]);
 
         //echo '<pre>'; var_dump($qrBuilder); die();  // test array
@@ -92,6 +94,7 @@ class TestQrSearch extends Qr
         $qrProvider = $creator->searchFilterBuild($qrBuilder);  // #3
 
         //echo '<pre>'; var_dump($qrProvider); die();  // test array
+        //echo '<pre>'; var_dump($qrProvider->getModels()); die();  // test array
 
         return $qrProvider;  // #4
     //---------------------------------------------------------------------------------------------------

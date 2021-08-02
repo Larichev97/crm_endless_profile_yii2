@@ -2,7 +2,10 @@
 
 namespace app\models;
 
+use app\services\filter_builder\QrSearchBuilder;
+use app\services\filter_builder\SearchFilterCreator;
 use Carbon\Carbon;
+use Yii;
 use yii\data\ActiveDataProvider;
 
 /**
@@ -71,44 +74,67 @@ class QrSearch extends Qr
      */
     public function qrFilter($params, bool $client_qrs = false, $client_id = null)
     {
-        $query = Qr::find();
+        // TEST BUILDER в QrSearch --------------------------------------------------------------------------
 
-        // add conditions that should always apply here
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-            'pagination' => [
-                'pageSize' => 20,
-            ],
-        ]);
+        $creator = new SearchFilterCreator();   // #1
 
         $this->load($params);
 
+        $request = Yii::$app->request->get('QrSearch');
 
-        // grid filtering conditions
+        //echo '<pre>'; var_dump($request); die();  // test array
 
-        $query->andFilterWhere(['=', 'id', $this->id])
-            ->andFilterWhere(['=', 'client_id', $this->client_id])
-            ->andFilterWhere(['=', 'country_born_id', $this->country_born_id])
-            ->andFilterWhere(['=', 'city_born_id', $this->city_born_id])
-            ->andFilterWhere(['=', 'profile_status_id', $this->profile_status_id]);
+        $qrBuilder = new QrSearchBuilder([  // #2
+            $request
+        ]);
 
+        //echo '<pre>'; var_dump($qrBuilder); die();  // test array
 
-        if (!empty($this->date_add_start)) {
-            $query->andFilterWhere(['>=', 'DATE(date_add)', $this->date_add_start]);
-        }
+        $qrProvider = $creator->searchFilterBuild($qrBuilder);  // #3
 
-        if (!empty($this->date_add_end)) {
-            $query->andFilterWhere(['<=', 'DATE(date_add)', $this->date_add_end]);
-        }
+        //echo '<pre>'; var_dump($qrProvider); die();  // test array
 
-        if ($client_qrs) {      // Только qr's клиента
-            $query->andWhere(['client_id' => $client_id]);
-        }
-
-        $query->orderBy('date_add DESC');
-
-        return $dataProvider;
+        return $qrProvider;  // #4
+        //---------------------------------------------------------------------------------------------------
+        //  ЗАКОММЕНТИРОВАНО 02.08.21
+//        $query = Qr::find();
+//
+//        // add conditions that should always apply here
+//
+//        $dataProvider = new ActiveDataProvider([
+//            'query' => $query,
+//            'pagination' => [
+//                'pageSize' => 20,
+//            ],
+//        ]);
+//
+//        $this->load($params);
+//
+//
+//        // grid filtering conditions
+//
+//        $query->andFilterWhere(['=', 'id', $this->id])
+//            ->andFilterWhere(['=', 'client_id', $this->client_id])
+//            ->andFilterWhere(['=', 'country_born_id', $this->country_born_id])
+//            ->andFilterWhere(['=', 'city_born_id', $this->city_born_id])
+//            ->andFilterWhere(['=', 'profile_status_id', $this->profile_status_id]);
+//
+//
+//        if (!empty($this->date_add_start)) {
+//            $query->andFilterWhere(['>=', 'DATE(date_add)', $this->date_add_start]);
+//        }
+//
+//        if (!empty($this->date_add_end)) {
+//            $query->andFilterWhere(['<=', 'DATE(date_add)', $this->date_add_end]);
+//        }
+//
+//        if ($client_qrs) {      // Только qr's клиента
+//            $query->andWhere(['client_id' => $client_id]);
+//        }
+//
+//        $query->orderBy('date_add DESC');
+//
+//        return $dataProvider;
     }
 
     public function getQrFliterInfoSearch(): string

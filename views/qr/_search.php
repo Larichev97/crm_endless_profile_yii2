@@ -5,7 +5,8 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $form yii\widgets\ActiveForm */
-/* @var $searchModelQrSearch app\models\QrSearch */
+///* @var $searchModelQrSearch app\models\QrSearch */
+/* @var $searchModelQrSearch app\models\TestQrSearch */
 
 ?>
 
@@ -20,7 +21,7 @@ use yii\widgets\ActiveForm;
                                 Фильтр
                                 <span style="background-color: #d1d8e0; margin-left: 5px; font-size: 14px;!important; border-radius: 20px;">
                                     <!-- Закомментировано для тестирования модели TestQrSearch.php !!! (Раскомментировать после проверки: 01.08.21) -->
-                                    <?php //= $searchModelQrSearch->getQrFliterInfoSearch(); ?>
+                                    <?php //echo $searchModelQrSearch->getQrFliterInfoSearch(); ?>
                                 </span>
                             </h3>
                         </div>
