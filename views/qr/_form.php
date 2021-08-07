@@ -12,7 +12,10 @@ use yii\widgets\ActiveForm;
 ?>
 <?php $form = ActiveForm::begin([
     'id' => 'form-qr',
-    'method' => 'post'
+    'method' => 'post',
+    'options' => [
+    'enctype' => 'multipart/form-data'
+]
 ]); ?>
 
 <div class="panel panel-default" style="padding: 15px 15px; background-color:#f5f5f5; border: solid 2px #00759C">
@@ -170,6 +173,14 @@ use yii\widgets\ActiveForm;
         </label>
         <div class="col-sm-10">
             <?= $form->field($model, 'geolocation')->textInput(['placeholder' => 'Укажите геолокацию таблички на месте установки (00.000000, 00.000000) ...'])->label(false) ?>
+        </div>
+    </div>
+    <div class="row form-group form-group-sm">
+        <label class="col-sm-2 control-label">
+            <b><?= $model->getAttributeLabel('voice_message') ?></b>
+        </label>
+        <div class="col-sm-10">
+            <?= $form->field($model, 'voice_message')->fileInput()->label(false) ?>
         </div>
     </div>
     <div class="row form-group form-group-sm">

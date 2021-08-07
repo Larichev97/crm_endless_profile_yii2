@@ -26,6 +26,7 @@ use yii\helpers\ArrayHelper;
  * @property int|null $profile_status_id
  * @property string|null $geolocation
  * @property string|null $qr_link
+ * @property string|null $voice_message
  * @property string|null $slider_img_link
  * @property string|null $photo_link
  * @property string|null $document_link

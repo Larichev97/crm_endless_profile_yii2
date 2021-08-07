@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\UploadFiles;
 use Carbon\Carbon;
 use Yii;
 use app\models\Qr;
@@ -101,6 +102,9 @@ class QrController extends Controller
         $model->profile_status_id = 1; // "Default QR-profile"
 
         if ($post && $model->load($post)) {
+            $uploadModel = new UploadFiles();
+            $uploadModel->getUploadVoiceMessage($model, 'voice_message');
+
             $model->save();
             return $this->redirect('index');
         }
@@ -125,8 +129,12 @@ class QrController extends Controller
 
         $model = $this->findModel($id);
 
-        if ($model->load($post)) {
+        if ($post && $model->load($post)) {
             $model->date_update = $dateNow;
+            // TEST UPDATE UPLOAD IMAGE --------------------------
+            $uploadModel = new UploadFiles();
+            $uploadModel->getUploadVoiceMessage($model, 'voice_message', $model->voice_message);
+            //----------------------------------------------------
 
             $model->save();
 

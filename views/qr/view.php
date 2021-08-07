@@ -120,6 +120,18 @@ $this->params['breadcrumbs'][] = $this->title;
                         : '-';
                 }
             ],
+            [
+                'attribute' => 'voice_message',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return ($model->voice_message) ?
+//                        "<audio controls> // NOT WORKING IN CHROME;
+//                            <source src='" . Yii::getAlias('@web') . "audio/qr-voice-messages/" . $model->voice_message . "' type='audio/mp3/wav'>
+//                         </audio>"
+                        $model->voice_message
+                        : '-';
+                }
+            ],
         ],
     ]) ?>
 
