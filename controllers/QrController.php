@@ -132,8 +132,10 @@ class QrController extends Controller
         if ($post && $model->load($post)) {
             $model->date_update = $dateNow;
             // TEST UPDATE UPLOAD IMAGE --------------------------
-            $uploadModel = new UploadFiles();
-            $uploadModel->getUploadVoiceMessage($model, 'voice_message', $model->voice_message);
+            if (null != $model->voice_message) {
+                $uploadModel = new UploadFiles();
+                $uploadModel->getUploadVoiceMessage($model, 'voice_message', $model->voice_message);
+            }
             //----------------------------------------------------
 
             $model->save();

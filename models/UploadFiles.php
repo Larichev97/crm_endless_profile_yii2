@@ -18,7 +18,11 @@ class UploadFiles
 
         $model->$field = UploadedFile::getInstance($model, '' . $field);
 
-        return $this->saveFile($model, $field, $nowDate);
+        if (!empty($model->$field)) {
+            return $this->saveFile($model, $field, $nowDate);
+        }
+
+        return false;
     }
 
     private function getQrVoiceMessagesFolder()
