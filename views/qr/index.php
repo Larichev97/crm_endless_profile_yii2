@@ -8,8 +8,6 @@ use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\widgets\Pjax;
 
-///* @var $searchModelQrSearch app\models\QrSearch */
-/* @var $searchModelQrSearch app\models\TestQrSearch */
 
 $this->title = 'Все QR-профили';
 $this->params['breadcrumbs'][] = $this->title;

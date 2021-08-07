@@ -60,7 +60,8 @@ class ClientController extends Controller
     public function actionIndex()
     {
         $searchModelClientSearch = new ClientSearch();
-        $clientSearchProvider = $searchModelClientSearch->filter(Yii::$app->request->queryParams);
+        $request_data = Yii::$app->request->get();
+        $clientSearchProvider = $searchModelClientSearch->filter($request_data);
 
         return $this->render('/client/index', [
             'searchModelClientSearch' => $searchModelClientSearch,
@@ -73,7 +74,8 @@ class ClientController extends Controller
         $modelClient = $this->findModel($id);
 
         $searchModelQr = new QrSearch();
-        $qrSearchProvider = $searchModelQr->qrFilter(Yii::$app->request->queryParams, true, $id);
+        $request_data = Yii::$app->request->get();
+        $qrSearchProvider = $searchModelQr->qrFilter($request_data, true, $id);
 
         return $this->render('/client/view', [
             'modelClient' => $modelClient,

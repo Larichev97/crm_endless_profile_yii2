@@ -2,7 +2,7 @@
 namespace app\services\filter_builder;
 
 
-class SearchFilter
+class SearchFilter extends AbstractSearchFilter
 {
     public $query;
     public $dataProvider;

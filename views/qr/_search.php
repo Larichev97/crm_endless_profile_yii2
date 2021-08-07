@@ -5,8 +5,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $form yii\widgets\ActiveForm */
-///* @var $searchModelQrSearch app\models\QrSearch */
-/* @var $searchModelQrSearch app\models\TestQrSearch */
+
 
 ?>
 
@@ -19,10 +18,7 @@ use yii\widgets\ActiveForm;
                         <div class="col-lg-10 text-left font-weight-bold" style="padding-top: 5px; width: 100%;" data-toggle="collapse" data-target="#collapseQrFilter" aria-expanded="true" aria-controls="collapseOne">
                             <h3 style="margin: 0; font-weight: bold">
                                 Фильтр
-                                <span style="background-color: #d1d8e0; margin-left: 5px; font-size: 14px;!important; border-radius: 20px;">
-                                    <!-- Закомментировано для тестирования модели TestQrSearch.php !!! (Раскомментировать после проверки: 01.08.21) -->
-                                    <?php //echo $searchModelQrSearch->getQrFliterInfoSearch(); ?>
-                                </span>
+                                <?php echo $searchModelQrSearch->getQrFliterInfoSearch(); ?>
                             </h3>
                         </div>
                         <div class="col-lg-2 text-right">

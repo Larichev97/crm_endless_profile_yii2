@@ -5,6 +5,7 @@
 nbproject
 /web/images/qr-codes/
 /web/images/qr-avatars/
+/web/audio/qr-voice-messages/
 
 # zend studio for eclipse project files
 .buildpath

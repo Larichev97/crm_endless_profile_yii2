@@ -1,14 +1,14 @@
 <?php
 namespace app\services\filter_builder;
 
-use app\models\Qr;
+use app\models\Client;
 use yii\data\ActiveDataProvider;
 
-class QrSearchFilter extends SearchFilter
+class ClientSearchFilter extends SearchFilter
 {
     public function __construct()
     {
-        $this->query = Qr::find();
+        $this->query = Client::find();
     }
 
     public function getQuery()

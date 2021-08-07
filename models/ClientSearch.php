@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use app\services\filter_builder\ClientSearchBuilder;
+use app\services\filter_builder\SearchFilterCreator;
 use Carbon\Carbon;
 use yii\data\ActiveDataProvider;
 
@@ -34,7 +36,7 @@ class ClientSearch extends Client
     {
         return [
             [['phone_number', 'first_name', 'city_id'], 'required'],
-            [['country_id', 'city_id', 'status_id'], 'integer'],
+            [['country_id', 'city_id', 'status_id', 'id'], 'integer'],
             [['first_name', 'last_name', 'patronymic_name', 'email', 'phone_number', 'comment',], 'string', 'max' => 255],
             [['date_add', 'date_update', 'bdate', 'date_add_start', 'date_add_end'], 'safe'],
         ];
@@ -66,77 +68,52 @@ class ClientSearch extends Client
 
     public function filter(array $params): ActiveDataProvider
     {
-        $query = $this::find();
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-            'pagination' => [
-                'pageSize' => 20,
-            ],
-        ]);
+        $creator = new SearchFilterCreator();
 
         $this->load($params);
 
-        $query->andFilterWhere(['=', 'id', $this->id])
-            ->andFilterWhere(['=', 'status_id', $this->status_id])
-            ->andFilterWhere(['=', 'country_id', $this->country_id])
-            ->andFilterWhere(['=', 'city_id', $this->city_id]);
-        //->andFilterWhere(['like', 'date_add', $this->date_add]);
+        $clientBuilder = new ClientSearchBuilder($params);
 
-        if (!empty($this->date_add_start)) {
-            $query->andFilterWhere(['>=', 'DATE(date_add)', $this->date_add_start]);
-        }
+        $clientProvider = $creator->searchFilterBuild($clientBuilder);
 
-        if (!empty($this->date_add_end)) {
-            $query->andFilterWhere(['<=', 'DATE(date_add)', $this->date_add_end]);
-        }
-
-        $query->orderBy('id ASC');
-
-        return $dataProvider;
+        return $clientProvider;
     }
 
-
-    public function getFliterInfoSearch(): string
+    public function getClientFliterInfoSearch(): string
     {
-        if (!empty($this->id)) {
-            $id_filter = '<span class="label" style="color: #d9534f; font-size: 14px;">' . $this->getAttributeLabel('id') . ': ' . $this->id . '</span>';
-        } else {
-            $id_filter = '';
-        }
+        $field_id = $this->InfoWithId('id');
+        $field_status_id = $this->InfoWithId('status_id', $this->getClientStatusName());
+        $field_country_id = $this->InfoWithId('country_id', $this->getClientCountryName());
+        $field_city_id = $this->InfoWithId('city_id', $this->getClientCityName());
+        $field_date_add_start = $this->InfoWithDate('date_add_start');
+        $field_date_add_end = $this->InfoWithDate('date_add_end');
 
-        if (!empty($this->status_id)) {
-            $status_id_filter = '<span class="label" style="color: #d9534f; font-size: 14px;">' . $this->getAttributeLabel('status_id') . ': ' .$this->getClientStatusName() . '</span>';
-        } else {
-            $status_id_filter = '';
-        }
-
-        if (!empty($this->country_id)) {
-            $country_id_filter = '<span class="label" style="color: #d9534f; font-size: 14px;">' . $this->getAttributeLabel('country_id') . ': ' . $this->getClientCountryName() . '</span>';
-        } else {
-            $country_id_filter = '';
-        }
-
-        if (!empty($this->city_id)) {
-            $city_id_id_filter = '<span class="label" style="color: #d9534f; font-size: 14px;">' . $this->getAttributeLabel('city_id') . ': ' . $this->getClientCityName() . '</span>';
-        } else {
-            $city_id_id_filter = '';
-        }
-
-        if (!empty($this->date_add_start)) {
-            $date_add_start_filter = '<span class="label" style="color: #d9534f; font-size: 14px;">' . $this->getAttributeLabel('date_add_start') . ': ' . Carbon::parse($this->date_add_start)->format('d.m.Y') . '</span>';
-        } else {
-            $date_add_start_filter = '';
-        }
-
-        if (!empty($this->date_add_end)) {
-            $date_add_end_filter = '<span class="label" style="color: #d9534f; font-size: 14px;">' . $this->getAttributeLabel('date_add_end') . ': ' . Carbon::parse($this->date_add_end)->format('d.m.Y') . '</span>';
-        } else {
-            $date_add_end_filter = '';
-        }
-
-
-        return $id_filter . $status_id_filter . $country_id_filter . $city_id_id_filter . $date_add_start_filter . $date_add_end_filter;
+        return $field_id . $field_status_id . $field_country_id . $field_city_id . $field_date_add_start . $field_date_add_end;
     }
+
+    private function InfoWithId(string $field, string $method = null)
+    {
+        if (!empty($this->$field) && !empty($method)) {
+            $id_filter_info = '<span class="label" style="color: #00759C; font-size: 14px; background-color: #d1d8e0; margin-left: 5px; !important; border-radius: 20px;">' . $this->getAttributeLabel('' . $field) . ': ' . $method . '</span>';
+        } elseif (!empty($this->$field)) {
+            $id_filter_info = '<span class="label" style="color: #00759C; font-size: 14px; background-color: #d1d8e0; margin-left: 5px; !important; border-radius: 20px;">' . $this->getAttributeLabel('' . $field) . ': ' . $this->$field . '</span>';
+        } else {
+            $id_filter_info = '';
+        }
+
+        return $id_filter_info;
+    }
+
+    private function InfoWithDate(string $field)
+    {
+        if (!empty($this->$field)) {
+            $date_filter_info = '<span class="label" style="color: #00759C; font-size: 14px; background-color: #d1d8e0; margin-left: 5px; !important; border-radius: 20px;">' . $this->getAttributeLabel('' . $field) . ': ' . Carbon::parse($this->$field)->format('d.m.Y') . '</span>';
+        } else {
+            $date_filter_info = '';
+        }
+
+        return $date_filter_info;
+    }
+
 
 }

@@ -140,14 +140,16 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="card">
                 <div class="card-header" id="headingClientsQr">
                     <div class="row">
-                        <div class="col-lg-10 text-left font-weight-bold" style="padding-top: 5px; width: 100%;" data-toggle="collapse" data-target="#collapseClientsQr" aria-expanded="true" aria-controls="collapseOne">
+                        <div class="col-lg-9 text-left font-weight-bold" style="padding-top: 5px; width: 100%;" data-toggle="collapse" data-target="#collapseClientsQr" aria-expanded="true" aria-controls="collapseOne">
                             <h3 style="margin: 0; font-weight: bold">
                                 QR-профили клиента
                             </h3>
                         </div>
-                        <div class="col-lg-2 text-right">
-                            <?= \yii\helpers\Html::a('Добавить QR <i class="fas fa-qrcode pl-2"></i>', ['qr/create'], ['class' => 'btn btn-success stop-event', 'data-original-title' => 'Добавить информацию для нового QR-профиля', 'data-toggle' => 'tooltip', 'data-placement' => 'top',]) ?>
+                        <div class="col-lg-3 text-right" size=";">
+                                <?= \yii\helpers\Html::a('Добавить QR <i class="fas fa-qrcode pl-2"></i>', ['qr/create'], ['class' => 'btn btn-success stop-event', 'data-original-title' => 'Добавить информацию для нового QR-профиля', 'data-toggle' => 'tooltip', 'data-placement' => 'top',]) ?>
+                                <?= Html::a('Очистить фильтр <i class="fas fa-broom pl-2"></i>', ['client/view', 'id' => $modelClient->id], ['class' => 'btn btn-danger full',]) ?>
                         </div>
+
                     </div>
                 </div>
 

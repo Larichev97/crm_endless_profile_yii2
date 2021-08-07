@@ -5,7 +5,6 @@ namespace app\models;
 use app\services\filter_builder\QrSearchBuilder;
 use app\services\filter_builder\SearchFilterCreator;
 use Carbon\Carbon;
-use Yii;
 use yii\data\ActiveDataProvider;
 
 /**
@@ -24,7 +23,9 @@ class QrSearch extends Qr
         return [
             [['client_id', 'first_name', 'last_name', 'date_death', 'biography',], 'required'],
             [['id', 'client_id', 'city_born_id', 'profile_status_id'], 'integer'],
-            [['first_name', 'last_name', 'patronymic_name', 'bdate', 'date_death', 'cause_of_death', 'country_born_id', 'profession', 'biography', 'characteristic', 'last_wish', 'comment', 'slider_img_link', 'photo_link', 'document_link', 'other_link', 'favourite_song', 'date_add', 'date_update', 'hobby', 'geolocation',], 'safe'],
+            [['first_name', 'last_name', 'patronymic_name', 'bdate', 'date_death', 'cause_of_death', 'country_born_id', 'profession', 'biography', 'characteristic', 'last_wish', 'comment', 'slider_img_link', 'photo_link', 'document_link', 'other_link', 'favourite_song', 'date_add', 'date_update', 'hobby', 'geolocation', 'date_add_start', 'date_add_end'], 'safe'],
+            [['qr_link'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, svg'],
+            [['voice_message'], 'file', 'skipOnEmpty' => true, 'extensions' => 'mp3, wav'],
         ];
     }
 
@@ -49,6 +50,7 @@ class QrSearch extends Qr
             'biography' => 'Биография',
             'characteristic' => 'Характеристика',
             'last_wish' => 'Последнее пожелание',
+            'voice_message' => 'Голосовое сообщение',
             'comment' => 'Комментарий агента',
             'profile_status_id' => 'Статус QR-таблички',
             'geolocation' => 'Геолокация таблички',
@@ -74,114 +76,51 @@ class QrSearch extends Qr
      */
     public function qrFilter($params, bool $client_qrs = false, $client_id = null)
     {
-        // TEST BUILDER в QrSearch --------------------------------------------------------------------------
-
-        $creator = new SearchFilterCreator();   // #1
+        $creator = new SearchFilterCreator();
 
         $this->load($params);
 
-        $request = Yii::$app->request->get('QrSearch');
+        $qrBuilder = new QrSearchBuilder($params,$client_qrs,$client_id);
 
-        //echo '<pre>'; var_dump($request); die();  // test array
+        $qrProvider = $creator->searchFilterBuild($qrBuilder);
 
-        $qrBuilder = new QrSearchBuilder([  // #2
-            $request
-        ]);
-
-        //echo '<pre>'; var_dump($qrBuilder); die();  // test array
-
-        $qrProvider = $creator->searchFilterBuild($qrBuilder);  // #3
-
-        //echo '<pre>'; var_dump($qrProvider); die();  // test array
-
-        return $qrProvider;  // #4
-        //---------------------------------------------------------------------------------------------------
-        //  ЗАКОММЕНТИРОВАНО 02.08.21
-//        $query = Qr::find();
-//
-//        // add conditions that should always apply here
-//
-//        $dataProvider = new ActiveDataProvider([
-//            'query' => $query,
-//            'pagination' => [
-//                'pageSize' => 20,
-//            ],
-//        ]);
-//
-//        $this->load($params);
-//
-//
-//        // grid filtering conditions
-//
-//        $query->andFilterWhere(['=', 'id', $this->id])
-//            ->andFilterWhere(['=', 'client_id', $this->client_id])
-//            ->andFilterWhere(['=', 'country_born_id', $this->country_born_id])
-//            ->andFilterWhere(['=', 'city_born_id', $this->city_born_id])
-//            ->andFilterWhere(['=', 'profile_status_id', $this->profile_status_id]);
-//
-//
-//        if (!empty($this->date_add_start)) {
-//            $query->andFilterWhere(['>=', 'DATE(date_add)', $this->date_add_start]);
-//        }
-//
-//        if (!empty($this->date_add_end)) {
-//            $query->andFilterWhere(['<=', 'DATE(date_add)', $this->date_add_end]);
-//        }
-//
-//        if ($client_qrs) {      // Только qr's клиента
-//            $query->andWhere(['client_id' => $client_id]);
-//        }
-//
-//        $query->orderBy('date_add DESC');
-//
-//        return $dataProvider;
+        return $qrProvider;
     }
 
     public function getQrFliterInfoSearch(): string
     {
-        if (!empty($this->id)) {
-            $id_filter = '<span class="label" style="color: #d9534f; font-size: 14px;">' . $this->getAttributeLabel('id') . ': ' . $this->id . '</span>';
+        $field_id = $this->InfoWithId('id');
+        $field_client_id = $this->InfoWithId('client_id');
+        $field_profile_status_id = $this->InfoWithId('profile_status_id', $this->getProfileQrStatusName());
+        $field_country_born_id = $this->InfoWithId('country_born_id', $this->getQrCountryOfBirthName());
+        $field_city_born_id = $this->InfoWithId('city_born_id', $this->getQrCityOfBirthName());
+        $field_date_add_start = $this->InfoWithDate('date_add_start');
+        $field_date_add_end = $this->InfoWithDate('date_add_end');
+
+        return $field_id . $field_client_id . $field_profile_status_id . $field_country_born_id . $field_city_born_id . $field_date_add_start . $field_date_add_end;
+    }
+
+    private function InfoWithId(string $field, string $method = null)
+    {
+        if (!empty($this->$field) && !empty($method)) {
+            $id_filter_info = '<span class="label" style="color: #00759C; font-size: 14px; background-color: #d1d8e0; margin-left: 5px; !important; border-radius: 20px;">' . $this->getAttributeLabel('' . $field) . ': ' . $method . '</span>';
+        } elseif (!empty($this->$field)) {
+            $id_filter_info = '<span class="label" style="color: #00759C; font-size: 14px; background-color: #d1d8e0; margin-left: 5px; !important; border-radius: 20px;">' . $this->getAttributeLabel('' . $field) . ': ' . $this->$field . '</span>';
         } else {
-            $id_filter = '';
+            $id_filter_info = '';
         }
 
-        if (!empty($this->client_id)) {
-            $client_id_filter = '<span class="label" style="color: #d9534f; font-size: 14px;">' . $this->getAttributeLabel('client_id') . ': ' . $this->client_id . '</span>';
+        return $id_filter_info;
+    }
+
+    private function InfoWithDate(string $field)
+    {
+        if (!empty($this->$field)) {
+            $date_filter_info = '<span class="label" style="color: #00759C; font-size: 14px; background-color: #d1d8e0; margin-left: 5px; !important; border-radius: 20px;">' . $this->getAttributeLabel('' . $field) . ': ' . Carbon::parse($this->$field)->format('d.m.Y') . '</span>';
         } else {
-            $client_id_filter = '';
+            $date_filter_info = '';
         }
 
-        if (!empty($this->profile_status_id)) {
-            $profile_status_id_filter = '<span class="label" style="color: #d9534f; font-size: 14px;">' . $this->getAttributeLabel('profile_status_id') . ': ' .$this->getProfileQrStatusName() . '</span>';
-        } else {
-            $profile_status_id_filter = '';
-        }
-
-        if (!empty($this->country_born_id)) {
-            $country_born_id_filter = '<span class="label" style="color: #d9534f; font-size: 14px;">' . $this->getAttributeLabel('country_born_id') . ': ' . $this->getQrCountryOfBirthName() . '</span>';
-        } else {
-            $country_born_id_filter = '';
-        }
-
-        if (!empty($this->city_born_id)) {
-            $city_born_id_id_filter = '<span class="label" style="color: #d9534f; font-size: 14px;">' . $this->getAttributeLabel('city_born_id') . ': ' . $this->getQrCityOfBirthName() . '</span>';
-        } else {
-            $city_born_id_id_filter = '';
-        }
-
-        if (!empty($this->date_add_start)) {
-            $date_add_start_filter = '<span class="label" style="color: #d9534f; font-size: 14px;">' . $this->getAttributeLabel('date_add_start') . ': ' . Carbon::parse($this->date_add_start)->format('d.m.Y') . '</span>';
-        } else {
-            $date_add_start_filter = '';
-        }
-
-        if (!empty($this->date_add_end)) {
-            $date_add_end_filter = '<span class="label" style="color: #d9534f; font-size: 14px;">' . $this->getAttributeLabel('date_add_end') . ': ' . Carbon::parse($this->date_add_end)->format('d.m.Y') . '</span>';
-        } else {
-            $date_add_end_filter = '';
-        }
-
-
-        return $id_filter . $client_id_filter . $profile_status_id_filter . $country_born_id_filter . $city_born_id_id_filter . $date_add_start_filter . $date_add_end_filter;
+        return $date_filter_info;
     }
 }
