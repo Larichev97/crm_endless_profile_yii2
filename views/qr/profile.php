@@ -196,6 +196,20 @@ $this->title = 'QR-профиль №' . $model->id;
             </div>
         </div>
     <?php } ?>
+    <?php if ($model->voice_message) { ?>
+        <div class="row mt-3">
+            <div class="col-sm-12 text-center text-uppercase"><h2 id="qrProfileHeader" style="font-size: 19px;"><b><?= $model->getAttributeLabel('voice_message') ?></b></h2><hr style="margin: 2px 100px 10px 100px; background-color: #000000; height: 2px;"></div>
+        </div>
+        <div class="card mt-1" style="border: solid 2px #00759C; background-color: #f5f5f5">
+            <div class="card-body  align-text-center">
+                <div class="row align-items-center" style="flex-wrap: nowrap">
+                    <div class="col-sm-12" style="color: #000000; text-align: justify;">
+                        <audio id="qrProfileAudio" controls src="<?= Yii::$app->request->baseUrl . '/audio/qr-voice-messages/' . $model->voice_message ?>">
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
 
 <!--  5 BLOCK  (SLIDER) -->
 <div class="row mt-3">
