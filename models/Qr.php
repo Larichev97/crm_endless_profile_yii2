@@ -232,7 +232,7 @@ class Qr extends \yii\db\ActiveRecord
             echo $item['name'];
             echo '</div>
                 <div class="col-lg-4 text-right">
-                    <a target="_blank" href="/qr/index?QrSearch[profile_status_id]=' . $item['id'] . '">
+                    <a href="/qr/index?QrSearch[profile_status_id]=' . $item['id'] . '">
                         <button data-original-title="Список';
 
             $this->getTooltipQrStatusTip($item['id']);

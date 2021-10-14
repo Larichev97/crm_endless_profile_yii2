@@ -8,7 +8,7 @@ use Carbon\Carbon;
 $this->title = 'QR-профиль №' . $model->id;
 
 ?>
-<!-- MOBILE VIEW (REDIRECT FROM QR-CODE) -->
+<!-- MOBILE VIEW (REDIRECT FROM QR-CODE)  bg-color=#1e272e -->
 
 <div class="qr-profile">
     <div class="row mt-2">
@@ -28,7 +28,7 @@ $this->title = 'QR-профиль №' . $model->id;
     <div class="row mt-3">
         <div class="col-sm-12 text-center text-uppercase"><h2 id="qrProfileHeader" style="font-size: 19px;"><b>Основное</b></h2><hr style="margin: 2px 100px 10px 100px; background-color: #000000; height: 2px;"></div>
     </div>
-    <div class="card mt-1" style="border: solid 2px #00759C; background-color: #f5f5f5">
+    <div class="card mt-1" style="box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset; border: solid 2px #00759C; background-color: #f5f5f5">
         <div class="card-body  align-text-center">
             <div class="row align-items-center" style="flex-wrap: nowrap">
                 <div class="col-sm-3">
@@ -154,7 +154,7 @@ $this->title = 'QR-профиль №' . $model->id;
         <div class="row mt-3">
             <div class="col-sm-12 text-center text-uppercase"><h2 id="qrProfileHeader" style="font-size: 19px;"><b><?= $model->getAttributeLabel('biography') ?></b></h2><hr style="margin: 2px 100px 10px 100px; background-color: #000000; height: 2px;"></div>
         </div>
-        <div class="card mt-1" style="border: solid 2px #00759C; background-color: #f5f5f5">
+        <div class="card mt-1" style="box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset; border: solid 2px #00759C; background-color: #f5f5f5">
             <div class="card-body  align-text-center">
                 <div class="row align-items-center" style="flex-wrap: nowrap">
                     <div class="col-sm-12" style="color: #000000; text-align: justify;">
@@ -170,7 +170,7 @@ $this->title = 'QR-профиль №' . $model->id;
         <div class="row mt-3">
             <div class="col-sm-12 text-center text-uppercase"><h2 id="qrProfileHeader" style="font-size: 19px;"><b><?= $model->getAttributeLabel('characteristic') ?></b></h2><hr style="margin: 2px 100px 10px 100px; background-color: #000000; height: 2px;"></div>
         </div>
-        <div class="card mt-1" style="border: solid 2px #00759C; background-color: #f5f5f5">
+        <div class="card mt-1" style="box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset; border: solid 2px #00759C; background-color: #f5f5f5">
             <div class="card-body  align-text-center">
                 <div class="row align-items-center" style="flex-wrap: nowrap">
                     <div class="col-sm-12" style="color: #000000; text-align: justify;">
@@ -186,7 +186,7 @@ $this->title = 'QR-профиль №' . $model->id;
         <div class="row mt-3">
             <div class="col-sm-12 text-center text-uppercase"><h2 id="qrProfileHeader" style="font-size: 19px;"><b><?= $model->getAttributeLabel('last_wish') ?></b></h2><hr style="margin: 2px 100px 10px 100px; background-color: #000000; height: 2px;"></div>
         </div>
-        <div class="card mt-1" style="border: solid 2px #00759C; background-color: #f5f5f5">
+        <div class="card mt-1" style="box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset; border: solid 2px #00759C; background-color: #f5f5f5">
             <div class="card-body  align-text-center">
                 <div class="row align-items-center" style="flex-wrap: nowrap">
                     <div class="col-sm-12" style="color: #000000; text-align: justify;">
@@ -200,7 +200,7 @@ $this->title = 'QR-профиль №' . $model->id;
         <div class="row mt-3">
             <div class="col-sm-12 text-center text-uppercase"><h2 id="qrProfileHeader" style="font-size: 19px;"><b><?= $model->getAttributeLabel('voice_message') ?></b></h2><hr style="margin: 2px 100px 10px 100px; background-color: #000000; height: 2px;"></div>
         </div>
-        <div class="card mt-1" style="border: solid 2px #00759C; background-color: #f5f5f5">
+        <div class="card mt-1" style="box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset; border: solid 2px #00759C; background-color: #f5f5f5">
             <div class="card-body  align-text-center">
                 <div class="row align-items-center" style="flex-wrap: nowrap">
                     <div class="col-sm-12" style="color: #000000; text-align: justify;">
@@ -215,7 +215,7 @@ $this->title = 'QR-профиль №' . $model->id;
 <div class="row mt-3">
     <div class="col-sm-12 text-center text-uppercase"><h2 id="qrProfileHeader" style="font-size: 19px;"><b>Галерея</b></h2><hr style="margin: 2px 100px 10px 100px; background-color: #000000; height: 2px;"></div>
 </div>
-<div class="carousel slide mt-2" id="carouselExampleIndicators" data-ride="carousel" style="border: solid 2px #00759C; background-color: #f5f5f5">
+<div class="carousel slide mt-2" id="carouselExampleIndicators" data-ride="carousel" style="border-radius:0.25rem; box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset; border: solid 2px #00759C; background-color: #f5f5f5">
     <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active" ></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>

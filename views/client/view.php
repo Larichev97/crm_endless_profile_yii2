@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">
     <div class="col-sm-10">
-        <h1><b>КАРТОЧКА КЛИЕНТА № <?= $modelClient->id ?></b></h1>
+        <h1 style="text-shadow: 2px 2px 5px #00759C;">Карточка клиента № <?= $modelClient->id ?></h1>
     </div>
     <div class="col-sm-2 text-right">
         <a class="btn btn-primary" target="_blank" href="/client/update?id=<?= $modelClient->id ?>">
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="col-lg-12">
         <div class="row">
             <div class="col-md-4 mb-3">
-                <div class="card" style="border: solid 2px #00759C; background-color: #f5f5f5; height:100%;">
+                <div class="card" style="box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px; border: solid 2px #00759C; background-color: #f5f5f5; height:100%;">
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
                             <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Фото клиента" class="rounded-circle" width="150" style="border: solid 4px #00759C;">
@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             </div>
             <div class="col-md-8">
-                <div class="card mb-3" style="border: solid 2px #00759C; background-color: #f5f5f5">
+                <div class="card mb-3" style="box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px; border: solid 2px #00759C; background-color: #f5f5f5">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-4">
@@ -136,7 +136,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <!--  ROW 2  -->
     <div class="col-lg-12">
-        <div class="accordion show mt-1 mb-1" id="accordionClientsQr" style="border: solid 2px #00759C; background-color: #f5f5f5">
+        <div class="accordion show mt-1 mb-1" id="accordionClientsQr" style="box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px; border: solid 2px #00759C; background-color: #f5f5f5">
             <div class="card">
                 <div class="card-header" id="headingClientsQr">
                     <div class="row">

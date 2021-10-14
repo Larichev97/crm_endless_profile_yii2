@@ -218,7 +218,7 @@ class Client extends ActiveRecord
             echo $item['name'];
             echo '</div>
                 <div class="col-lg-4 text-right">
-                    <a target="_blank" href="/client/index?ClientSearch[status_id]=' . $item['id'] . '">
+                    <a href="/client/index?ClientSearch[status_id]=' . $item['id'] . '">
                         <button data-original-title="Список';
 
             $this->getTooltipClientStatusTip($item['id']);

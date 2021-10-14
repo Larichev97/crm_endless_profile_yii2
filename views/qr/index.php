@@ -30,7 +30,7 @@ Breadcrumbs::widget([
 
 ?>
 <div class="row panel panel-default">
-    <div class="col-lg-12" style="background-color:#00759C; padding-left:3px; padding-right:3px;">
+    <div class="col-lg-12" style="box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px; background-color:#00759C; padding-left:3px; padding-right:3px;">
         <div class="accordion show mt-1 mb-1" id="accordionQr">
             <div class="card">
                 <div class="card-header" id="headingQr">

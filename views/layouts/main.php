@@ -30,7 +30,7 @@ AppAsset::register($this);
     <?php
     NavBar::begin([
         //'brandLabel' => Yii::$app->name,
-        'brandLabel' => '<span id="brandLogo">ENDLESS PROFILE</span>',
+        'brandLabel' => '<span id="brandLogo" style="text-shadow: 2px 2px 5px #00759C;">ENDLESS PROFILE</span>',
         'brandUrl' => '/main/',
         'options' => [
             //'class' => 'navbar-dark bg-dark navbar-expand-lg',    //new b4  15.06.21

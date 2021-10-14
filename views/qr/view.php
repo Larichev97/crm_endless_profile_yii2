@@ -12,9 +12,10 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="qr-view">
     <div class="row align-items-center">
-        <div class="col-lg-9"><h1>Данные QR-профиля №<?= $model->id ?>  <?= Html::a('Вид QR-профиля <i class="fas fa-qrcode pl-2"></i>', ['profile', 'id' => $model->id], ['class' => 'btn btn-info', 'target' => '_blank']) ?></h1></div>
-        <div class="col-lg-3 text-right">
+        <div class="col-lg-6"><h1 style="text-shadow: 2px 2px 5px #00759C;">Данные QR-профиля №<?= $model->id ?></h1></div>
+        <div class="col-lg-6 text-right">
             <p style="margin: 0">
+                <?= Html::a('Вид QR-профиля <i class="fas fa-qrcode pl-2"></i>', ['profile', 'id' => $model->id], ['class' => 'btn btn-info', 'target' => '_blank']) ?>
                 <?= Html::a('Редактировать <i class="fas fa-edit pl-2"></i>', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
                 <?= Html::a('Удалить <i class="fas fa-trash pl-2"></i>', ['delete', 'id' => $model->id], [
                     'class' => 'btn btn-danger',
@@ -29,8 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <!-- row 1  -----------------------------------------------------------------------  -->
     <div class="row">
-        <div class="col-lg-4">
-            <div class="card" style="border: solid 2px #00759C; background-color: #f5f5f5; height:100%;">
+        <div class="col-lg-4 d-flex">
+            <div class="card" style="box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px; border: solid 2px #00759C; background-color: #f5f5f5; height:100%;">
                 <div class="card-body">
                     <div class="d-flex flex-column align-items-center text-center">
                         <?php
@@ -48,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="row">
                         <div class="col-sm-6">
                             <h6 class="mb-0">
-                                <b><?= $model->getAttributeLabel('profile_status_id') ?> :</b>
+                                <b><?= $model->getAttributeLabel('profile_status_id') ?></b>
                             </h6>
                         </div>
                        <div class="col-sm-6 text-center">
@@ -58,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="row">
                         <div class="col-sm-6">
                             <h6 class="mb-0">
-                                <b><?= $model->getAttributeLabel('geolocation') ?> :</b>
+                                <b><?= $model->getAttributeLabel('geolocation') ?></b>
                             </h6>
                         </div>
                        <div class="col-sm-6 text-center">
@@ -74,7 +75,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="row">
                         <div class="col-sm-6">
                             <h6 class="mb-0">
-                                <b><?= $model->getAttributeLabel('comment') ?> :</b>
+                                <b><?= $model->getAttributeLabel('comment') ?></b>
                             </h6>
                         </div>
                         <div class="col-sm-6 text-center">
@@ -85,8 +86,8 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
 
-        <div class="col-lg-8">
-            <div class="card" style="border: solid 2px #00759C; background-color: #f5f5f5">
+        <div class="col-lg-8 d-flex">
+            <div class="card" style="box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px; border: solid 2px #00759C; background-color: #f5f5f5">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-4">
@@ -185,7 +186,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <!-- row 2  -----------------------------------------------------------------------  -->
     <div class="row" style="margin-top: 20px; padding: 0 15px;">
-        <div class="col-lg-12" style="margin-top: 10px; border: solid 2px #00759C; background-color: #f5f5f5; border-radius: 0.25rem;">
+        <div class="col-lg-12" style="box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px; margin-top: 10px; border: solid 2px #00759C; background-color: #f5f5f5; border-radius: 0.25rem;">
             <ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-top: 10px;">
                 <li class="nav-item waves-effect waves-light">
                     <a class="nav-link active" id="biography-tab" data-toggle="tab" href="#biography" role="tab" aria-controls="biography" aria-selected="false">Биография</a>

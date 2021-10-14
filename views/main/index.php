@@ -24,7 +24,7 @@ $this->title = 'Панель управления';
     <div class="col-lg-6" style="padding-left: 15px; padding-right: 15px;">
         <div class="row panel panel-default">
             <div class="col-lg-12">
-                <div class="accordion show mt-1 mb-1" id="accordionClientMain">
+                <div class="accordion show mt-1 mb-1" id="accordionClientMain" style="box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;">
                     <div class="card" style="border: solid 4px #00759C;">
                         <div class="card-header" id="headingClientMain">
                             <div class="row">
@@ -42,7 +42,7 @@ $this->title = 'Панель управления';
                                         Все
                                     </div>
                                     <div class="col-lg-4 text-right">
-                                        <a target="_blank" href="/client/index"><button data-original-title="Список всех клиентов" data-toggle="tooltip" data-placement="top" class="btn" style="width: 60%; background-color: #00759C"><span class="span font-weight-bold" style="color: #ffffff; font-size: 16px;"><?= $modelClient->getCountClientsAllStatus() ?></span></button></a>
+                                        <a href="/client/index"><button data-original-title="Список всех клиентов" data-toggle="tooltip" data-placement="top" class="btn" style="width: 60%; background-color: #00759C"><span class="span font-weight-bold" style="color: #ffffff; font-size: 16px;"><?= $modelClient->getCountClientsAllStatus() ?></span></button></a>
                                     </div>
                                 </div><hr>
                                 <?php $modelClient->getPrintClientStatusesBlock($modelClient->getClientStatuses(), $modelClient->getLastClientStatusIdInTable(), $modelClient) ?>
@@ -56,7 +56,7 @@ $this->title = 'Панель управления';
     <div class="col-lg-6" style="padding-left: 15px; padding-right: 15px;">
         <div class="row panel panel-default">
             <div class="col-lg-12">
-                <div class="accordion show mt-1 mb-1" id="accordionQrMain">
+                <div class="accordion show mt-1 mb-1" id="accordionQrMain" style="box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;">
                     <div class="card" style="border: solid 4px #00759C;">
                         <div class="card-header" id="headingQrMain">
                             <div class="row">
@@ -74,7 +74,7 @@ $this->title = 'Панель управления';
                                         Все
                                     </div>
                                     <div class="col-lg-4 text-right">
-                                        <a target="_blank" href="/qr/index"><button data-original-title="Список всех QR-табличек" data-toggle="tooltip" data-placement="top" class="btn" style="width: 60%; background-color: #00759C"><span class="span font-weight-bold" style="color: #ffffff; font-size: 16px;"><?= $modelQr->getCountQrsAllStatus() ?></span></button></a>
+                                        <a href="/qr/index"><button data-original-title="Список всех QR-табличек" data-toggle="tooltip" data-placement="top" class="btn" style="width: 60%; background-color: #00759C"><span class="span font-weight-bold" style="color: #ffffff; font-size: 16px;"><?= $modelQr->getCountQrsAllStatus() ?></span></button></a>
                                     </div>
                                 </div><hr>
                                 <?php $modelQr->getPrintQrStatusesBlock($modelQr->getQrStatuses(), $modelQr->getLastQrStatusIdInTable(), $modelQr) ?>
