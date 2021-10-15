@@ -139,10 +139,10 @@ $this->title = 'QR-профиль №' . $model->id;
 
                 <div class="row align-items-center text-center" style="flex-wrap: nowrap; margin-top: 5px;">
                     <div class="col-sm-6">
-                        <a target="_blank" data-pjax="0" href="https://music.youtube.com/search?q=' . $model->favourite_song . '"><i class="fab fa-youtube" style="color: #FF0000"></i> YouTube Music</a>
+                        <a target="_blank" data-pjax="0" href="https://music.youtube.com/search?q=<?=$model->favourite_song?>"><i class="fab fa-youtube" style="color: #FF0000"></i> YouTube Music</a>
                     </div>
                     <div class="col-sm-6">
-                        <a target="_blank" data-pjax="0" href="https://open.spotify.com/search/' . $model->favourite_song . '"><i class="fab fa-spotify" style="color: #1DB954; background-color: #000000"></i> Spotify</a>
+                        <a target="_blank" data-pjax="0" href="https://open.spotify.com/search/<?=$model->favourite_song?>"><i class="fab fa-spotify" style="color: #1DB954; background-color: #000000"></i> Spotify</a>
                     </div>
                 </div>
             <?php } ?>
