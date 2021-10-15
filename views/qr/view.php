@@ -187,7 +187,13 @@ $this->params['breadcrumbs'][] = $this->title;
                             </h6>
                         </div>
                         <div class="col-sm-8 text-secondary">
-                            <audio id="qrProfileAudio" controls src="<?= Yii::$app->request->baseUrl . '/audio/qr-voice-messages/' . $model->voice_message ?>">
+                            <?php
+                                if ($model->voice_message) {
+                                   echo '<audio id="qrProfileAudio" controls src="' . Yii::$app->request->baseUrl . '/audio/qr-voice-messages/' . $model->voice_message .'">';
+                                } else {
+                                    echo '-';
+                                }
+                            ?>
                         </div>
                     </div>
                 </div>

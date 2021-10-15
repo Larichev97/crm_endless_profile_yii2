@@ -5,7 +5,7 @@ use yii\widgets\Pjax;
 
 ?>
 
-<div class="row">
+<div class="row" style="margin-bottom: 10px;">
     <div class="col-sm-10"></div>
     <div class="col-sm-2">
         <a class="btn btn-info full btn-block" href="/qr/upload-slider-files?qr_id=<?=$qr_id?>">Загрузить<i class="fas fa-file-upload pl-2"></i></a>
@@ -18,7 +18,7 @@ use yii\widgets\Pjax;
     <?=
     GridView::widget([
         'dataProvider' => $sliderProvider,
-        'filterModel' => $modelSlider,
+        //'filterModel' => $modelSlider,
         'columns' => [
             [
                 'headerOptions' => ['width' => '50'],

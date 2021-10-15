@@ -5,7 +5,6 @@ use yii\widgets\ActiveForm;
 use app\assets\AppAsset;
 
 /* @var $this yii\web\View */
-///* @var $modelQrSliders app\models\QrSliders */
 /* @var $form yii\widgets\ActiveForm */
 
 AppAsset::register($this);
