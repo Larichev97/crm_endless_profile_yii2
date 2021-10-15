@@ -2,11 +2,15 @@
 
 namespace app\controllers;
 
+use app\models\QrSlider;
+use app\models\QrSliderSearch;
 use app\models\UploadFiles;
+use app\models\UploadForm;
 use Carbon\Carbon;
 use Yii;
 use app\models\Qr;
 use app\models\QrSearch;
+use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -34,7 +38,7 @@ class QrController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index','create','update','delete', 'view', 'profile', 'upload-qr',],
+                        'actions' => ['index','create','update','delete', 'view', 'profile', 'upload-qr', 'upload-slider-files',],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -67,8 +71,19 @@ class QrController extends Controller
      */
     public function actionView($id)
     {
+        $modelSlider = new QrSliderSearch();
+
+        $sliderProvider = new ActiveDataProvider([
+            'query' => $modelSlider->search($id),
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+        ]);
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'modelSlider' => $modelSlider,
+            'sliderProvider' => $sliderProvider,
         ]);
     }
 
@@ -80,8 +95,20 @@ class QrController extends Controller
      */
     public function actionProfile($id)
     {
+        $modelSliderOne = QrSlider::find()->where(['qr_id' => $id])->orderBy(['id' => SORT_ASC])->asArray()->one();
+
+        $modelSlider = QrSlider::find()
+            ->where(['qr_id' => $id]);
+        if ($modelSliderOne) {
+            $modelSlider->andWhere(['NOT IN', 'id', $modelSliderOne['id']]);
+         }
+        $modelSlider->asArray()
+            ->all();
+
         return $this->render('profile', [
             'model' => $this->findModel($id),
+            'modelSlider' => $modelSlider,
+            'modelSliderOne' => $modelSliderOne,
         ]);
     }
 
@@ -190,6 +217,28 @@ class QrController extends Controller
 
         return $this->render('upload-qr', [
             'model' => $model,
+        ]);
+    }
+
+    /**
+     * Uploads Qr-slider images.
+     * @return mixed
+     */
+    public function actionUploadSliderFiles($qr_id)
+    {
+        $modelQrSliders = new UploadForm();
+
+        if (Yii::$app->request->isPost) {
+            $modelQrSliders->imageFiles = UploadedFile::getInstances($modelQrSliders, 'imageFiles');
+            if ($modelQrSliders->uploadSliderImages($qr_id)) {
+                // file is uploaded successfully
+                return $this->redirect(['view', 'id' => $qr_id, '#' => 'slider',]);
+            }
+        }
+
+        return $this->render('upload-qr-sliders', [
+            'modelQrSliders' => $modelQrSliders,
+            'qr_id' => $qr_id,
         ]);
     }
 

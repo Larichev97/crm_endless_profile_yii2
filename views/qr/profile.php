@@ -212,25 +212,34 @@ $this->title = 'QR-профиль №' . $model->id;
     <?php } ?>
 
 <!--  5 BLOCK  (SLIDER) -->
+<?php if ($modelSliderOne) { ?>
 <div class="row mt-3">
     <div class="col-sm-12 text-center text-uppercase"><h2 id="qrProfileHeader" style="font-size: 19px;"><b>Галерея</b></h2><hr style="margin: 2px 100px 10px 100px; background-color: #000000; height: 2px;"></div>
 </div>
 <div class="carousel slide mt-2" id="carouselExampleIndicators" data-ride="carousel" style="border-radius:0.25rem; box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset; border: solid 2px #00759C; background-color: #f5f5f5">
     <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active" ></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="<?=$modelSliderOne['id']?>" class="active" ></li>
+        <?php
+            foreach ($modelSlider as $key => $value) {
+        ?>
+            <li data-target="#carouselExampleIndicators" data-slide-to="<?=$value['id']?>"></li>
+        <?php
+            }
+        ?>
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="d-block w-100" alt="Фото №1">
+            <img src="<?=\Yii::$app->request->getBaseUrl() . '/images/qr-sliders/qr-' . $modelSliderOne['qr_id'] . '/' . $modelSliderOne['file_name']?>" class="d-block w-100" style="max-height: 100%;" alt="Фото №<?=$modelSliderOne['id']?>">
         </div>
+        <?php
+            foreach ($modelSlider as $value) {
+        ?>
         <div class="carousel-item">
-            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="d-block w-100" alt="Фото №2">
+            <img src="<?=\Yii::$app->request->getBaseUrl() . '/images/qr-sliders/qr-' . $value['qr_id'] . '/' . $value['file_name']?>" class="d-block w-100" style="max-height: 100%;" alt="Фото №<?=$value['id']?>">
         </div>
-        <div class="carousel-item">
-            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="d-block w-100" alt="Фото №3">
-        </div>
+        <?php
+            }
+        ?>
     </div>
     <a href="#carouselExampleIndicators" class="carousel-control-prev" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -240,6 +249,8 @@ $this->title = 'QR-профиль №' . $model->id;
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Вперёд</span>
     </a>
+
 </div>
+    <?php } ?>
 <!--  ----------------- -->
 </div>

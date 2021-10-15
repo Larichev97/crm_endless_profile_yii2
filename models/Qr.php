@@ -87,7 +87,7 @@ class Qr extends \yii\db\ActiveRecord
             'profile_status_id' => 'Статус QR-таблички',
             'geolocation' => 'Геолокация таблички',
             'qr_link' => 'Изображение QR-кода',
-            'slider_img_link' => 'Slider Img Link', // создать отдельную таблицу!
+            'slider_img_link' => 'Slider Img Link', // table `qr_sliders`
             'photo_link' => 'Личное фото',
             'document_link' => 'Документ',
             'other_link' => 'Ссылка',
@@ -95,6 +95,11 @@ class Qr extends \yii\db\ActiveRecord
             'date_add' => 'Дата создания',
             'date_update' => 'Дата обновления',
         ];
+    }
+
+    public function getQrSliders()
+    {
+        return $this->hasMany(QrSlider::className(), ['qr_id' => 'id']);
     }
 
     public function getProfileQrStatus()

@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <!-- row 1  -----------------------------------------------------------------------  -->
     <div class="row">
-        <div class="col-lg-4 d-flex">
+        <div class="col-lg-4">
             <div class="card" style="box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px; border: solid 2px #00759C; background-color: #f5f5f5; height:100%;">
                 <div class="card-body">
                     <div class="d-flex flex-column align-items-center text-center">
@@ -86,7 +86,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
 
-        <div class="col-lg-8 d-flex">
+        <div class="col-lg-8">
             <div class="card" style="box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px; border: solid 2px #00759C; background-color: #f5f5f5">
                 <div class="card-body">
                     <div class="row">
@@ -178,6 +178,17 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="col-sm-8 text-secondary">
                             <?= ($model->last_wish) ? $model->favourite_song : '-' ?>
                         </div>
+                    </div><hr>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <h6 class="mb-0">
+                                <b><?= $model->getAttributeLabel('voice_message') ?></b>
+                            </h6>
+                        </div>
+                        <div class="col-sm-8 text-secondary">
+                            <audio id="qrProfileAudio" controls src="<?= Yii::$app->request->baseUrl . '/audio/qr-voice-messages/' . $model->voice_message ?>">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -210,7 +221,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
                 <div class="tab-pane fade" id="slider" role="tabpanel" aria-labelledby="slider-tab">
                     <?= $this->render('/qr/view-tabs/tab_sliders', [
-                            'model' => $model,
+                        'qr_id' => $model->id,
+                        'modelSlider' => $modelSlider,
+                        'sliderProvider' => $sliderProvider,
                         ]);
                     ?>
                 </div>
