@@ -102,12 +102,11 @@ class QrController extends Controller
         if ($modelSliderOne) {
             $modelSlider->andWhere(['NOT IN', 'id', $modelSliderOne['id']]);
          }
-        $modelSlider->asArray()
-            ->all();
+        $modelSliderQuery = $modelSlider->asArray()->all();
 
         return $this->render('profile', [
             'model' => $this->findModel($id),
-            'modelSlider' => $modelSlider,
+            'modelSlider' => $modelSliderQuery,
             'modelSliderOne' => $modelSliderOne,
         ]);
     }
@@ -204,6 +203,11 @@ class QrController extends Controller
             $model->load($post);
 
             $model->qr_link = UploadedFile::getInstance($model, 'qr_link');
+
+            $file_path = 'images/qr-codes/qr-code-profile-' . $id . '.' . $model->qr_link->extension;
+            if (file_exists($file_path)) {
+                unlink($file_path);
+            }
 
             //$model->qr_link->saveAs("images/qr-codes/{$model->qr_link->baseName}.{$model->qr_link->extension}");
             $model->qr_link->saveAs("images/qr-codes/qr-code-profile-" . $id . ".{$model->qr_link->extension}");

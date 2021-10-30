@@ -220,10 +220,12 @@ $this->title = 'QR-профиль №' . $model->id;
     <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="<?=$modelSliderOne['id']?>" class="active" ></li>
         <?php
-            foreach ($modelSlider as $key => $value) {
+            if ($modelSlider) {
+                foreach ($modelSlider as $key => $value) {
         ?>
             <li data-target="#carouselExampleIndicators" data-slide-to="<?=$value['id']?>"></li>
         <?php
+                }
             }
         ?>
     </ol>
@@ -232,12 +234,14 @@ $this->title = 'QR-профиль №' . $model->id;
             <img src="<?=\Yii::$app->request->getBaseUrl() . '/images/qr-sliders/qr-' . $modelSliderOne['qr_id'] . '/' . $modelSliderOne['file_name']?>" class="d-block w-100" style="max-height: 100%;" alt="Фото №<?=$modelSliderOne['id']?>">
         </div>
         <?php
-            foreach ($modelSlider as $value) {
+            if ($modelSlider) {
+                foreach ($modelSlider as $value) {
         ?>
         <div class="carousel-item">
             <img src="<?=\Yii::$app->request->getBaseUrl() . '/images/qr-sliders/qr-' . $value['qr_id'] . '/' . $value['file_name']?>" class="d-block w-100" style="max-height: 100%;" alt="Фото №<?=$value['id']?>">
         </div>
         <?php
+                }
             }
         ?>
     </div>
