@@ -16,6 +16,9 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'LQoUVzCCzdeGXlWGH1G2x4_I53ymVcPy',
+            'parsers' => [                                   //-------------------------
+                'application/json' => 'yii\web\JsonParser',  // new 13.11.2021 REST API
+            ]                                                //-------------------------
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -47,7 +50,12 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            //'enableStrictParsing' => true, // new 13.11.2021 REST API  Если раскомм., то остальные actions = #404  20/11/2021 ????
             'rules' => [
+                ['class' => 'yii\rest\UrlRule',
+                 'controller' => 'rest',
+                 'pluralize' => false // по умолчанию true множественная форма для табл.
+                ], // new 13.11.2021 REST API
             ],
         ],
 

@@ -97,6 +97,48 @@ class Qr extends \yii\db\ActiveRecord
         ];
     }
 
+    public function fields()
+    {
+        return [
+            'id',
+            'client_id',
+            'first_name',
+            'last_name',
+            'patronymic_name',
+            'bdate',
+            'date_death',
+            'cause_of_death',
+            'country_born_id',
+            'city_born_id',
+            'hobby',
+            'profession',
+            'biography',
+            'characteristic',
+            'last_wish',
+            'voice_message',
+            'comment',
+            'profile_status_id',
+            'geolocation',
+            'qr_link',
+            'photo_link',
+            'document_link',
+            'other_link',
+            'favourite_song',
+            'date_add',
+            'date_update',
+        ];
+    }
+
+    public function extraFields()
+    {
+        return [
+            'qrSliders',
+            'profileQrStatus',
+            'qrCityOfBirth',
+            'qrCountryOfBirth',
+        ];
+    }
+
     public function getQrSliders()
     {
         return $this->hasMany(QrSlider::className(), ['qr_id' => 'id']);

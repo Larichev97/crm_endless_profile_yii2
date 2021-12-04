@@ -29,7 +29,8 @@
         "nesbot/carbon": "*",
         "wbraganca/yii2-dynamicform": "^2.0.2",
         "yiisoft/yii2-bootstrap4": "~2.0.6",
-        "xutl/yii2-inspinia-widget": "^1.0"
+        "xutl/yii2-inspinia-widget": "^1.0",
+        "aferrandini/phpqrcode": "1.0.1"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

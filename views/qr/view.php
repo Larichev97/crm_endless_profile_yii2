@@ -2,6 +2,7 @@
 
 use Carbon\Carbon;
 use yii\helpers\Html;
+//use PHPQRCode\QRcode;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Qr */
@@ -11,6 +12,10 @@ $this->params['breadcrumbs'][] = ['label' => 'Все QR-профили', 'url' =
 $this->params['breadcrumbs'][] = $this->title;
 
 $PROJECT_NAME = 'http://crm_project/'; // FOR API GENERATE QR
+//$link = 'http://crm_project/qr/profile?id='. $model->id ;
+//$dir_path = 'images/qr-codes/qr-code-profile-' . $model->id . '.png';
+//$test = QRcode::png($link, $dir_path, 'L', 5);
+
 ?>
 <div class="qr-view">
     <div class="row align-items-center">
@@ -38,16 +43,26 @@ $PROJECT_NAME = 'http://crm_project/'; // FOR API GENERATE QR
                     <div class="d-flex flex-column align-items-center text-center">
                         <?php
                             if (!empty($model->qr_link)) {
-                                //echo Html::img(Yii::getAlias('@web') . '/images/qr-codes/' . $model->qr_link, ['width' => '350px',]);
-                                echo Html::img(Yii::getAlias('@web') . '/images/qr-codes/' . $model->qr_link, ['width' => '350px',]) .
-                                '<div style="display:flex; align-items:center; margin-top: 15px;">' .
-                                '<a class="btn btn-warning" data-pjax="0" target="_blank" href="https://api.qrserver.com/v1/create-qr-code/?size=800x800&format=svg&data=' . $PROJECT_NAME . 'qr/profile?id='. $model->id .'">Новый QR<i class="fas fa-qrcode pl-2"></i></a>' .
-                                Html::a('Загрузить новый QR<i class="fas fa-file-upload pl-2"></i>', ['/qr/upload-qr', 'id' => $model->id], ['class' => 'btn btn-success', 'style' => 'margin-left: 20px;']) .
-                                '</div>';
-                            } else {
+                                echo Html::img(Yii::getAlias('@web') . '/images/qr-codes/' . $model->qr_link, ['width' => '350px',]); //.
+//                                '<div style="display:flex; align-items:center; margin-top: 15px;">' .
+//                                '<a class="btn btn-warning" data-pjax="0" target="_blank" href="https://api.qrserver.com/v1/create-qr-code/?size=800x800&format=svg&data=' . $PROJECT_NAME . 'qr/profile?id='. $model->id .'">Новый QR<i class="fas fa-qrcode pl-2"></i></a>' .
+//                                Html::a('Загрузить новый QR<i class="fas fa-file-upload pl-2"></i>', ['/qr/upload-qr', 'id' => $model->id], ['class' => 'btn btn-success', 'style' => 'margin-left: 20px;']) .
+//                                '</div>';
+                                // 04.12.2021 UPDATE QR -----
+                                // TEST NEW GENERATE QR
                                 echo '<div style="display:flex; align-items:center;">' .
-                                     '<a class="btn btn-warning" data-pjax="0" target="_blank" href="https://api.qrserver.com/v1/create-qr-code/?size=800x800&format=svg&data=' . $PROJECT_NAME . 'qr/profile?id='. $model->id .'">Сгенерировать QR-КОД<i class="fas fa-qrcode pl-2"></i></a>' .
-                                        Html::a('Загрузить изображение<i class="fas fa-file-upload pl-2"></i>', ['/qr/upload-qr', 'id' => $model->id], ['class' => 'btn btn-success', 'style' => 'margin-left: 20px;']) .
+                                    Html::a('Обновить QR-КОД<i class="fas fa-file-upload pl-2"></i>', ['/qr/generate-qr-code', 'qr_id' => $model->id], ['class' => 'btn btn-warning', 'style' => 'margin-top: 15px;']) .
+                                    '</div>';
+                                //---------------------------
+                            } else {
+                                // 20.11.2021 - БЫЛО ДО НОВОЙ ГЕНЕРАЦИИ QR!
+//                                echo '<div style="display:flex; align-items:center;">' .
+//                                     '<a class="btn btn-warning" data-pjax="0" target="_blank" href="https://api.qrserver.com/v1/create-qr-code/?size=800x800&format=svg&data=' . $PROJECT_NAME . 'qr/profile?id='. $model->id .'">Сгенерировать QR-КОД<i class="fas fa-qrcode pl-2"></i></a>' .
+//                                        Html::a('Загрузить изображение<i class="fas fa-file-upload pl-2"></i>', ['/qr/upload-qr', 'id' => $model->id], ['class' => 'btn btn-success', 'style' => 'margin-left: 20px;']) .
+//                                     '</div>';
+                                // TEST NEW GENERATE QR
+                                echo '<div style="display:flex; align-items:center;">' .
+                                        Html::a('Сгенерировать QR-КОД<i class="fas fa-file-upload pl-2"></i>', ['/qr/generate-qr-code', 'qr_id' => $model->id], ['class' => 'btn btn-success', 'style' => 'margin-left: 20px;']) .
                                      '</div>';
                             }
                         ?>

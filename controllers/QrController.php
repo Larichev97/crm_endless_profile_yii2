@@ -7,6 +7,7 @@ use app\models\QrSliderSearch;
 use app\models\UploadFiles;
 use app\models\UploadForm;
 use Carbon\Carbon;
+use PHPQRCode\QRcode;
 use Yii;
 use app\models\Qr;
 use app\models\QrSearch;
@@ -38,7 +39,7 @@ class QrController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index','create','update','delete', 'view', 'profile', 'upload-qr', 'upload-slider-files',],
+                        'actions' => ['index','create','update','delete', 'view', 'profile', 'upload-qr', 'upload-slider-files', 'generate-qr-code'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -244,6 +245,32 @@ class QrController extends Controller
             'modelQrSliders' => $modelQrSliders,
             'qr_id' => $qr_id,
         ]);
+    }
+
+    /**
+     * Generate Qr-code image by qr_id.
+     * @return mixed
+     */
+    public function actionGenerateQrCode($qr_id)
+    {
+        $modelQr = $this->findModel($qr_id);
+
+        $link = 'http://crm_project/qr/profile?id='. $qr_id;
+        $dir_path = 'images/qr-codes/qr-code-profile-' . $qr_id . '.png';
+
+        if (file_exists($dir_path)) { // for update QR
+            unlink($dir_path);
+        }
+
+        $modelQr->qr_link = 'qr-code-profile-' . $qr_id . '.png'; // save in DB
+        $modelQr->save(false);
+
+        $generate = QRcode::png($link, $dir_path, 'L', 8);
+
+        echo $generate;
+
+        //return true;
+        return $this->redirect(['view', 'id' => $qr_id]);
     }
 
     /**
